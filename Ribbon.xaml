@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- BEGIN STANDARD SECTION DO NOT EDIT 
+    except for ensuring x:Uid="CustomRibbonTab" has a unique ID
+    -->
+<RibbonControl 
+    x:Uid="CustomRibbonTab" xmlns="clr-namespace:Autodesk.Windows;assembly=AdWindows" 
+    xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:adwi="clr-namespace:Autodesk.Internal.Windows;assembly=AdWindows"  
+    xmlns:system="clr-namespace:System;assembly=mscorlib" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Autodesk.Navisworks.Gui.Roamer.AIRLook;assembly=navisworks.gui.roamer">
+
+
+    <RibbonTab Id="SbrTools_tab_1"  KeyTip="L1">
+
+        <!-- RibbonPanel provides a distinct panel in the ribbon tab for a group of buttons -->
+        <RibbonPanel x:Uid="RibbonPanel_1">
+            <!-- RibbonPanelSource defines the content and proerties of the parent RibbonPanel. -->
+            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_1" KeyTip="C1" Title="Update">
+
+
+                <local:NWRibbonButton x:Uid="Button_1" Id="btnUpdate"
+                                      Size="Large"
+                                      KeyTip="B1"
+                                      ShowText="True" 
+                                      Text="Dynamic Update"
+                                      Orientation="Horizontal"/>
+
+            </RibbonPanelSource>
+        </RibbonPanel>
+        <RibbonPanel x:Uid="RibbonPanel_2">
+            <!-- RibbonPanelSource defines the content and proerties of the parent RibbonPanel. -->
+            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_2" KeyTip="C2" Title="Property">
+
+
+                <local:NWRibbonButton x:Uid="Button_2" Id="btnProperty"
+                                      Size="Large"
+                                      KeyTip="B2"
+                                      ShowText="True" 
+                                      Text="Property Finder"
+                                      Orientation="Horizontal"/>
+
+            </RibbonPanelSource>
+        </RibbonPanel>
+        <RibbonPanel x:Uid="RibbonPanel_3">
+            <!-- RibbonPanelSource defines the content and proerties of the parent RibbonPanel. -->
+            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_3" KeyTip="C3" Title="Links">
+
+
+                <local:NWRibbonButton x:Uid="Button_2" Id="btnLinks"
+                                      Size="Large"
+                                      KeyTip="B3"
+                                      ShowText="True" 
+                                      Text="Link Navigator"
+                                      Orientation="Horizontal"/>
+
+            </RibbonPanelSource>
+        </RibbonPanel>
+    </RibbonTab>
+
+
+</RibbonControl>
+
+    
