@@ -1,4 +1,4 @@
-﻿namespace Training.Ctr
+﻿namespace LinkNavigator
 {
     partial class UcLinks
     {

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Autodesk.Navisworks.Api;
 
-namespace Training.Ctr
+namespace LinkNavigator
 {
 
 

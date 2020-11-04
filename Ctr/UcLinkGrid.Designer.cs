@@ -1,4 +1,4 @@
-﻿namespace Training.Ctr
+﻿namespace LinkNavigator
 {
     partial class UcLinkGrid
     {
@@ -42,8 +42,8 @@
             // 
             this.gridLinks.AccessibleRole = System.Windows.Forms.AccessibleRole.Link;
             this.gridLinks.AllowUserToOrderColumns = true;
-            this.gridLinks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.gridLinks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridLinks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridLinks.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
