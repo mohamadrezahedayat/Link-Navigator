@@ -76,18 +76,6 @@
     <Compile Include="Ctr\LinkNavigatorWPFCtr.xaml.cs">
       <DependentUpon>LinkNavigatorWPFCtr.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ctr\UcLinkGrid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Ctr\UcLinkGrid.Designer.cs">
-      <DependentUpon>UcLinkGrid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Ctr\UcLinks.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Ctr\UcLinks.designer.cs">
-      <DependentUpon>UcLinks.cs</DependentUpon>
-    </Compile>
     <Compile Include="LinkNavigatorPlugin.cs" />
     <Compile Include="SbrToolsCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,14 +89,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Ctr\UcLinkGrid.resx">
-      <DependentUpon>UcLinkGrid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Ctr\UcLinks.resx">
-      <DependentUpon>UcLinks.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -5,9 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkNavigator.Ctr"
              mc:Ignorable="d" 
-             d:DesignHeight="450" Width="400">
-    <Grid>
-        <Label Content="Hello New WPF Control" HorizontalAlignment="Left" Margin="87,121,0,0" VerticalAlignment="Top" Width="229" FontSize="20"/>
+             x:Name="UserControl"
+             d:DesignHeight="300" Width="300" >
+    <DockPanel Margin="5">
+        <Grid DockPanel.Dock="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="60" Width="*" />
+                <ColumnDefinition MinWidth="100" Width="3*"  />
+                <ColumnDefinition Width="*"  />
+                <ColumnDefinition Width="*"  />
 
-    </Grid>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name :" Grid.Row="1" Grid.Column="0" Margin="1"    />
+            <TextBox x:Name="txtNameFilter" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="1" TextChanged="txtNameFilter_TextChanged"/>
+            <TextBlock Text="Category :" Grid.Row="2" Grid.Column="0" Margin="1"   />
+            <TextBox x:Name="txtCategory" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="1" TextChanged="txtCategory_TextChanged"/>
+            <TextBlock Text="URL :" Grid.Row="3" Grid.Column="0" Margin="1"   />
+            <TextBox x:Name="txtUrlFilter" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="1" TextChanged="txtUrlFilter_TextChanged"/>
+            <DataGrid x:Name="gridLinks" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" MinHeight="200" Width="auto" Margin="10" MouseDoubleClick="gridLinks_MouseDoubleClick">
+               
+            </DataGrid>
+        </Grid>
+    </DockPanel>
 </UserControl>

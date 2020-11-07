@@ -22,10 +22,15 @@ namespace LinkNavigator
                     if (!Autodesk.Navisworks.Api.Application.IsAutomated)
                     {
                         var pluginRecord = Autodesk.Navisworks.Api.Application.Plugins.FindPlugin("LinkNavigator.MohamadrezaHedayat");
-                        if (pluginRecord is DockPanePluginRecord && pluginRecord.IsEnabled)
+                        if (pluginRecord != null && pluginRecord is DockPanePluginRecord && pluginRecord.IsEnabled)
                         {
                             var docPanel = (DockPanePlugin)(pluginRecord.LoadedPlugin ?? pluginRecord.LoadPlugin());
-                            docPanel.ActivatePane();
+                           
+                            if (docPanel != null)
+                            {
+                                //switch the Visible flag
+                                docPanel.Visible = !docPanel.Visible;
+                            }
                         }
                     }
 
