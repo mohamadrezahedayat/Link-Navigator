@@ -7,13 +7,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Autodesk.Navisworks.Gui.Roamer.AIRLook;assembly=navisworks.gui.roamer">
     <RibbonTab Id="SbrTools_tab_1"  KeyTip="L1">
-        <RibbonPanel x:Uid="RibbonPanel_3">
-            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_3" KeyTip="C3" Title="Links">
-                <local:NWRibbonButton x:Uid="Button_2" Id="btnLinks"
+        <RibbonPanel x:Uid="RibbonPanel_1">
+            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_1" KeyTip="r1" Title="Links">
+                <local:NWRibbonButton x:Uid="Button_1" Id="btnLinks"
                                       Size="Large"
-                                      KeyTip="B3"
+                                      KeyTip="B1"
                                       ShowText="True" 
                                       Text="Link Navigator"
+                                      Orientation="Horizontal"/>
+            </RibbonPanelSource>
+        </RibbonPanel>
+        <RibbonPanel x:Uid="RibbonPanel_2">
+            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_2" KeyTip="r2" Title="Vault">
+                <local:NWRibbonButton x:Uid="Button_2" Id="btnVault"
+                                      Size="Large"
+                                      KeyTip="b2"
+                                      ShowText="True" 
+                                      Text="Vault Viewer"
                                       Orientation="Horizontal"/>
             </RibbonPanelSource>
         </RibbonPanel>

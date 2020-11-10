@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2020\Plugins\LinkNavigator\</OutputPath>
+    <OutputPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Plugins\LinkNavigator\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,17 +41,44 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdWindows">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2020\AdWindows.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\AdWindows.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.Explorer.Extensibility">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.Connectivity.Explorer.Extensibility.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.Explorer.ExtensibilityTools">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.Connectivity.Explorer.ExtensibilityTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.Extensibility.Framework">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.Connectivity.Extensibility.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.WebServices">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.Connectivity.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.WebServices.Interop">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.Connectivity.WebServices.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.WebServices.WCF">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.Connectivity.WebServices.WCF.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.DataManagement.Client.Framework">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.DataManagement.Client.Framework.Forms">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.DataManagement.Client.Framework.Vault">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.Vault.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.DataManagement.Client.Framework.Vault.Forms">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.Vault.Forms.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.Navisworks.Api">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2020\Autodesk.Navisworks.Api.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Autodesk.Navisworks.Api.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="navisworks.gui.roamer">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2020\navisworks.gui.roamer.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\navisworks.gui.roamer.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -76,9 +103,26 @@
     <Compile Include="Ctr\LinkNavigatorWPFCtr.xaml.cs">
       <DependentUpon>LinkNavigatorWPFCtr.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ctr\vaultViewerctr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ctr\vaultViewerctr.Designer.cs">
+      <DependentUpon>vaultViewerctr.cs</DependentUpon>
+    </Compile>
     <Compile Include="LinkNavigatorPlugin.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
     <Compile Include="SbrToolsCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VaultViewerPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Ctr\LinkNavigatorWPFCtr.xaml">
@@ -90,16 +134,42 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uplevel_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViewOptions_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ctr\vaultViewerctr.resx">
+      <DependentUpon>vaultViewerctr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set path=C:\Users\data\Desktop\navis project\LinkNavigator\Ribbon.xaml
 
-set addinPath=C:\Program Files\Autodesk\Navisworks Manage 2020\Plugins\LinkNavigator\
-set addinPath1=C:\Program Files\Autodesk\Navisworks Manage 2020\Plugins\LinkNavigator\en-US\
+set addinPath=C:\Program Files\Autodesk\Navisworks Manage 2018\Plugins\LinkNavigator\
+set addinPath1=C:\Program Files\Autodesk\Navisworks Manage 2018\Plugins\LinkNavigator\en-US\
 
 mkdir "%25addinPath1%25"
 
 copy /Y "%25path%25" "%25addinPath%25"
-copy /Y "%25path%25" "%25addinPath1%25"</PostBuildEvent>
+copy /Y "%25path%25" "%25addinPath1%25"
+
+set path2=C:\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\clmloader.dll
+copy /Y "%25path2%25" "%25addinPath%25"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
