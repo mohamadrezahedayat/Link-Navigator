@@ -75,7 +75,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(500, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(500, 35);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,7 +85,7 @@
             this.login_toolStripMenuItem,
             this.logout_toolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(67, 30);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(67, 29);
             this.toolStripMenuItem1.Text = "&Vault";
             // 
             // login_toolStripMenuItem
@@ -116,65 +116,70 @@
             this.checkInToolStripMenuItem,
             this.getToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
-            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(87, 30);
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(87, 29);
             this.actionsToolStripMenuItem.Text = "Actions";
             // 
             // m_openFileToolStripMenuItem
             // 
             this.m_openFileToolStripMenuItem.Enabled = false;
             this.m_openFileToolStripMenuItem.Name = "m_openFileToolStripMenuItem";
-            this.m_openFileToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.m_openFileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.m_openFileToolStripMenuItem.Text = "Open File";
+            this.m_openFileToolStripMenuItem.Click += new System.EventHandler(this.m_openFileToolStripMenuItem_Click);
             // 
             // m_addFileToolStripMenuItem
             // 
             this.m_addFileToolStripMenuItem.Enabled = false;
             this.m_addFileToolStripMenuItem.Name = "m_addFileToolStripMenuItem";
-            this.m_addFileToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.m_addFileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.m_addFileToolStripMenuItem.Text = "Add File ...";
+            this.m_addFileToolStripMenuItem.Click += new System.EventHandler(this.m_addFileToolStripMenuItem_Click);
             // 
             // m_advancedFindToolStripMenuItem
             // 
             this.m_advancedFindToolStripMenuItem.Enabled = false;
             this.m_advancedFindToolStripMenuItem.Name = "m_advancedFindToolStripMenuItem";
-            this.m_advancedFindToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.m_advancedFindToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.m_advancedFindToolStripMenuItem.Text = "Advanced Find...";
+            this.m_advancedFindToolStripMenuItem.Click += new System.EventHandler(this.m_advancedFindToolStripMenuItem_Click);
             // 
             // addFolderToolStripMenuItem
             // 
             this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.addFolderToolStripMenuItem.Text = "Add Folder";
+            this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
             // 
             // changePropertyToolStripMenuItem
             // 
             this.changePropertyToolStripMenuItem.Name = "changePropertyToolStripMenuItem";
-            this.changePropertyToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.changePropertyToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.changePropertyToolStripMenuItem.Text = "Change Property";
             // 
             // checkOutToolStripMenuItem
             // 
             this.checkOutToolStripMenuItem.Name = "checkOutToolStripMenuItem";
-            this.checkOutToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.checkOutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.checkOutToolStripMenuItem.Text = "CheckOut";
             // 
             // undoCheckOutToolStripMenuItem
             // 
             this.undoCheckOutToolStripMenuItem.Name = "undoCheckOutToolStripMenuItem";
-            this.undoCheckOutToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.undoCheckOutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.undoCheckOutToolStripMenuItem.Text = "Undo CheckOut";
             // 
             // checkInToolStripMenuItem
             // 
             this.checkInToolStripMenuItem.Name = "checkInToolStripMenuItem";
-            this.checkInToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.checkInToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.checkInToolStripMenuItem.Text = "CheckIn";
             // 
             // getToolStripMenuItem
             // 
             this.getToolStripMenuItem.Name = "getToolStripMenuItem";
-            this.getToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.getToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.getToolStripMenuItem.Text = "Get";
+            this.getToolStripMenuItem.Click += new System.EventHandler(this.getToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -214,16 +219,16 @@
             this.vaultNavigationPathComboboxControl1.Location = new System.Drawing.Point(99, 5);
             this.vaultNavigationPathComboboxControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.vaultNavigationPathComboboxControl1.Name = "vaultNavigationPathComboboxControl1";
-            this.vaultNavigationPathComboboxControl1.Size = new System.Drawing.Size(272, 38);
+            this.vaultNavigationPathComboboxControl1.Size = new System.Drawing.Size(272, 37);
             this.vaultNavigationPathComboboxControl1.TabIndex = 10;
             // 
             // vaultBrowserControl1
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.vaultBrowserControl1, 3);
-            this.vaultBrowserControl1.Location = new System.Drawing.Point(4, 53);
+            this.vaultBrowserControl1.Location = new System.Drawing.Point(4, 52);
             this.vaultBrowserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.vaultBrowserControl1.Name = "vaultBrowserControl1";
-            this.vaultBrowserControl1.Size = new System.Drawing.Size(497, 183);
+            this.vaultBrowserControl1.Size = new System.Drawing.Size(497, 178);
             this.vaultBrowserControl1.TabIndex = 11;
             // 
             // fileName_label
@@ -231,9 +236,9 @@
             this.fileName_label.AutoSize = true;
             this.fileName_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileName_label.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fileName_label.Location = new System.Drawing.Point(3, 243);
+            this.fileName_label.Location = new System.Drawing.Point(3, 235);
             this.fileName_label.Name = "fileName_label";
-            this.fileName_label.Size = new System.Drawing.Size(89, 36);
+            this.fileName_label.Size = new System.Drawing.Size(89, 35);
             this.fileName_label.TabIndex = 0;
             this.fileName_label.Text = "File name:";
             this.fileName_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -243,9 +248,9 @@
             this.revision_label.AutoSize = true;
             this.revision_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.revision_label.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.revision_label.Location = new System.Drawing.Point(3, 279);
+            this.revision_label.Location = new System.Drawing.Point(3, 270);
             this.revision_label.Name = "revision_label";
-            this.revision_label.Size = new System.Drawing.Size(89, 36);
+            this.revision_label.Size = new System.Drawing.Size(89, 35);
             this.revision_label.TabIndex = 2;
             this.revision_label.Text = "Files of type:";
             this.revision_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -256,7 +261,7 @@
             this.fileType_comboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileType_comboBox.Enabled = false;
             this.fileType_comboBox.FormattingEnabled = true;
-            this.fileType_comboBox.Location = new System.Drawing.Point(98, 282);
+            this.fileType_comboBox.Location = new System.Drawing.Point(98, 273);
             this.fileType_comboBox.Name = "fileType_comboBox";
             this.fileType_comboBox.Size = new System.Drawing.Size(404, 28);
             this.fileType_comboBox.TabIndex = 3;
@@ -266,11 +271,11 @@
             this.tableLayoutPanel1.SetColumnSpan(this.m_tabControl, 3);
             this.m_tabControl.Controls.Add(this.tabPage1);
             this.m_tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_tabControl.Location = new System.Drawing.Point(4, 320);
+            this.m_tabControl.Location = new System.Drawing.Point(4, 310);
             this.m_tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.m_tabControl.Name = "m_tabControl";
             this.m_tabControl.SelectedIndex = 0;
-            this.m_tabControl.Size = new System.Drawing.Size(497, 237);
+            this.m_tabControl.Size = new System.Drawing.Size(497, 247);
             this.m_tabControl.TabIndex = 8;
             // 
             // tabPage1
@@ -280,7 +285,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(489, 204);
+            this.tabPage1.Size = new System.Drawing.Size(489, 214);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Uses";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -303,11 +308,11 @@
             this.tableLayoutPanel1.SetColumnSpan(this.fileName_multiPartTextBox, 2);
             this.fileName_multiPartTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileName_multiPartTextBox.EditMode = Autodesk.DataManagement.Client.Framework.Forms.Controls.MultiPartTextBoxControl.EditModeOption.FullEdit;
-            this.fileName_multiPartTextBox.Location = new System.Drawing.Point(101, 251);
+            this.fileName_multiPartTextBox.Location = new System.Drawing.Point(101, 243);
             this.fileName_multiPartTextBox.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.fileName_multiPartTextBox.Name = "fileName_multiPartTextBox";
             this.fileName_multiPartTextBox.Parts = ((System.Collections.Generic.IEnumerable<string>)(resources.GetObject("fileName_multiPartTextBox.Parts")));
-            this.fileName_multiPartTextBox.Size = new System.Drawing.Size(398, 20);
+            this.fileName_multiPartTextBox.Size = new System.Drawing.Size(398, 19);
             this.fileName_multiPartTextBox.TabIndex = 2;
             // 
             // label1
@@ -318,7 +323,7 @@
             this.label1.Location = new System.Drawing.Point(1, 1);
             this.label1.Margin = new System.Windows.Forms.Padding(1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 46);
+            this.label1.Size = new System.Drawing.Size(93, 45);
             this.label1.TabIndex = 12;
             this.label1.Text = "Look For:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -333,7 +338,7 @@
             this.switchView_toolStripSplitButton});
             this.toolStrip1.Location = new System.Drawing.Point(375, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(130, 48);
+            this.toolStrip1.Size = new System.Drawing.Size(130, 47);
             this.toolStrip1.TabIndex = 13;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -343,7 +348,7 @@
             this.navigateBack_toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("navigateBack_toolStripButton.Image")));
             this.navigateBack_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.navigateBack_toolStripButton.Name = "navigateBack_toolStripButton";
-            this.navigateBack_toolStripButton.Size = new System.Drawing.Size(34, 43);
+            this.navigateBack_toolStripButton.Size = new System.Drawing.Size(34, 42);
             this.navigateBack_toolStripButton.Text = "Back";
             this.navigateBack_toolStripButton.Click += new System.EventHandler(this.navigateBack_toolStripButton_Click);
             // 
@@ -353,7 +358,7 @@
             this.navigateUp_toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("navigateUp_toolStripButton.Image")));
             this.navigateUp_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.navigateUp_toolStripButton.Name = "navigateUp_toolStripButton";
-            this.navigateUp_toolStripButton.Size = new System.Drawing.Size(34, 43);
+            this.navigateUp_toolStripButton.Size = new System.Drawing.Size(34, 42);
             this.navigateUp_toolStripButton.Text = "Up";
             this.navigateUp_toolStripButton.Click += new System.EventHandler(this.navigateUp_toolStripButton_Click);
             // 
@@ -363,7 +368,7 @@
             this.switchView_toolStripSplitButton.Image = global::LinkNavigator.Resource1.ViewOptions_16;
             this.switchView_toolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.switchView_toolStripSplitButton.Name = "switchView_toolStripSplitButton";
-            this.switchView_toolStripSplitButton.Size = new System.Drawing.Size(45, 28);
+            this.switchView_toolStripSplitButton.Size = new System.Drawing.Size(45, 42);
             this.switchView_toolStripSplitButton.Text = "Switch View";
             this.switchView_toolStripSplitButton.ButtonClick += new System.EventHandler(this.switchView_toolStripSplitButton_ButtonClick);
             this.switchView_toolStripSplitButton.DropDownOpening += new System.EventHandler(this.switchView_toolStripSplitButton_DropDownOpening);

@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
-
 using ACW = Autodesk.Connectivity.WebServices;
 using Framework = Autodesk.DataManagement.Client.Framework;
 using Vault = Autodesk.DataManagement.Client.Framework.Vault;
 using Forms = Autodesk.DataManagement.Client.Framework.Vault.Forms;
-using Autodesk.DataManagement.Client.Framework.Vault.Forms.Settings;
-using Autodesk.DataManagement.Client.Framework.Vault.Internal.ExtensionMethods;
-using Autodesk.Connectivity.WebServices;
-using Autodesk.DataManagement.Client.Framework.Vault.Currency.Properties;
+
+using Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities;
+
 
 namespace LinkNavigator.Ctr
 {
@@ -288,6 +281,153 @@ namespace LinkNavigator.Ctr
             foreach (ToolStripMenuItem button in m_viewButtons)
             {
                 button.Checked = button.Tag.Equals(vaultBrowserControl1.CurrentLayout);
+            }
+        }
+        public void showSelectedLink(string link)
+        {
+            var folderAndFiles = extractFileNameFromeLink(link);
+            if (m_conn == null)
+                login();
+
+            if (m_conn != null)
+            {
+                navigateToSelectedFile(folderAndFiles);
+
+            }
+
+        }
+
+        private void focusSelectedFile(string[] folderAndFiles, long folderId)
+        {
+            var files = m_conn.WebServiceManager.DocumentService.GetLatestFilesByFolderId(folderId, true);
+            long fileId = 1;
+            foreach (var item in files)
+            {
+                if (item.Name==folderAndFiles.Last())
+                {
+                    fileId = item.Id;
+                }
+
+
+            }
+            
+            var file = m_conn.FileManager.GetFilesByIterationIds(new List<long> { fileId }).FirstOrDefault();
+            m_model.SetSelectedContent(null, new List<IEntity> { file.Value });
+        }
+
+        private void navigateToSelectedFile(string[] folderAndFiles)
+        {
+            var folder = findParentFolder(folderAndFiles);
+            if (folder != null)
+            {
+                List<long> ids = new List<long> { folder.Id };
+
+                var entityFolder = m_conn.FolderManager.GetFoldersByIds(ids).FirstOrDefault().Value;
+
+                m_model.Navigate(entityFolder, Forms.Currency.NavigationContext.DrillDown);
+                focusSelectedFile(folderAndFiles, ids.FirstOrDefault());
+            }
+        }
+        private ACW.Folder findParentFolder(string[] fileAndFolders)
+        {
+            string path = "$";
+            for (int i = 0; i < fileAndFolders.Length - 1; i++)
+            {
+                path += "/";
+                path += fileAndFolders[i];
+            }
+            var folder = m_conn.WebServiceManager.DocumentService.GetFolderByPath(path);
+            return folder;
+        }
+
+        private string[] extractFileNameFromeLink(string link)
+        {
+            var positionStringStart = "ObjectId=%24%2f";
+            var positionStringEnd = "&ObjectType=";
+            var substring1 = link.Substring(link.IndexOf(positionStringStart) + positionStringStart.Length);
+            var substring2 = substring1.Remove(substring1.IndexOf(positionStringEnd));
+            var extractedPathReplaceSlash = substring2.Replace("%2f", "/");
+            var extractedPathReplaceplus = extractedPathReplaceSlash.Replace("+", " ");
+            var fileAndFolders = extractedPathReplaceplus.Split('/');
+            return fileAndFolders;
+        }
+
+        private void m_openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFile();
+        }
+        private void OpenFile()
+        {
+            Vault.Currency.Entities.FileIteration file = m_model.SelectedContent.FirstOrDefault() as Vault.Currency.Entities.FileIteration;
+            if (file != null)
+                OpenFileCommand.Execute(file, m_conn);
+        }
+
+        private void m_advancedFindToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AdvancedSearch();
+        }
+        private void AdvancedSearch()
+        {
+            FinderForm finderForm = new FinderForm(m_conn);
+            finderForm.Show();
+        }
+        private void getToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            get();
+        }
+        private void get()
+        {
+            Vault.Settings.AcquireFilesSettings setting = new Vault.Settings.AcquireFilesSettings(m_conn, true);
+            long selectedItemId = m_model.SelectedContent.FirstOrDefault().EntityIterationId;
+            Vault.Currency.Entities.FileIteration selectedItem = m_conn.FileManager.GetFilesByIterationIds(new long[] { selectedItemId }).FirstOrDefault().Value;
+            setting.AddFileToAcquire(selectedItem, Vault.Settings.AcquireFilesSettings.AcquisitionOption.Download);
+
+            m_conn.FileManager.AcquireFiles(setting);
+
+        }
+
+        private void addFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateFolder();
+        }
+        private void CreateFolder()
+        {
+            FileNameForm form = new FileNameForm();
+            form.ShowDialog();
+            if (form.DialogResult != DialogResult.OK)
+                return;
+            try
+            {
+                Vault.Currency.Entities.Folder parent = m_model.Parent as Vault.Currency.Entities.Folder;
+                Vault.Currency.Entities.EntityCategory category = Vault.Currency.Entities.EntityCategory.EmptyCategory;
+                m_conn.FolderManager.CreateFolder(parent, form.folderName, false, category);
+                m_model.Reload();
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
+        private void m_addFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Vault.Currency.Entities.Folder parent = m_model.Parent as Vault.Currency.Entities.Folder;
+            if (parent != null)
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Multiselect = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string[] filePaths = openFileDialog.FileNames;
+                    foreach (string filePath in filePaths)
+                    {
+                        AddFileCommand.Execute(filePath, parent, m_conn);
+                    }
+                    m_model.Reload();
+                }
             }
         }
     }

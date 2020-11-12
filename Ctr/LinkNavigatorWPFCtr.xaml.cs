@@ -1,20 +1,15 @@
 ﻿using Autodesk.Navisworks.Api;
+using Autodesk.Navisworks.Api.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LinkNavigator.Ctr
 {
@@ -113,7 +108,7 @@ namespace LinkNavigator.Ctr
                 Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.Changed += clearField;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return;
@@ -178,7 +173,15 @@ namespace LinkNavigator.Ctr
             {
                 if (currentLink.Contains("/AutodeskDM/Services/"))
                 {
-                    System.Windows.Forms.MessageBox.Show("vault service is running");
+                    try
+                    {
+                        OpenVaultPluginAndShowFile(currentLink);
+                    }
+                    catch (Exception)
+                    {
+
+                       
+                    }
                 }
                 else if ( currentLink.StartsWith("www") || currentLink.StartsWith("http"))
                 {
@@ -196,13 +199,43 @@ namespace LinkNavigator.Ctr
                 }
                 else
                 {
-                    System.Diagnostics.Process.Start(currentLink);
+                    try
+                    {
+                        System.Diagnostics.Process.Start(currentLink);
+                    }
+                    catch (Exception)
+                    {
+
+                      
+                    }
+                    
                 }
 
 
             }
         }
+        private void OpenVaultPluginAndShowFile(string link)
+        {
+            if (!Autodesk.Navisworks.Api.Application.IsAutomated)
+            {
+                var pluginRecord = Autodesk.Navisworks.Api.Application.Plugins.FindPlugin("VaultViewer.MohamadrezaHedayat");
+                if (pluginRecord != null && pluginRecord is DockPanePluginRecord && pluginRecord.IsEnabled)
+                {
+                    var docPanel = (DockPanePlugin)(pluginRecord.LoadedPlugin ?? pluginRecord.LoadPlugin());
 
+                    if (docPanel != null)
+                    {
+                        //switch the Visible flag
+                        docPanel.Visible = true;
+                    }
+                }
+                var loadedPlugin = (VaultViewerPlugin)pluginRecord.LoadedPlugin;
+                vaultViewerctr vaultViewerctr = loadedPlugin.formControl;
+                vaultViewerctr.showSelectedLink(link);
+
+            }
+
+        }
         private void gridLinks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DependencyObject dep = (DependencyObject)e.OriginalSource;

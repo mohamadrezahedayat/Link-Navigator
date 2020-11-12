@@ -9,7 +9,12 @@ namespace LinkNavigator
     [DockPanePlugin(500, 600, AutoScroll = true, FixedSize = false, MinimumHeight = 500, MinimumWidth = 600)]
     class VaultViewerPlugin : DockPanePlugin
     {
-        public override Control CreateControlPane() => new vaultViewerctr { Dock = DockStyle.Fill };
+        public vaultViewerctr formControl { get; set; }
+        public override Control CreateControlPane()
+        {
+            formControl =  new vaultViewerctr { Dock = DockStyle.Fill };
+            return formControl;
+        }
 
         public override void DestroyControlPane(Control pane)
         {
