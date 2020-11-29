@@ -58,6 +58,7 @@
             this.navigateBack_toolStripButton = new System.Windows.Forms.ToolStripButton();
             this.navigateUp_toolStripButton = new System.Windows.Forms.ToolStripButton();
             this.switchView_toolStripSplitButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.generateHyperlinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.m_tabControl.SuspendLayout();
@@ -114,7 +115,8 @@
             this.checkOutToolStripMenuItem,
             this.undoCheckOutToolStripMenuItem,
             this.checkInToolStripMenuItem,
-            this.getToolStripMenuItem});
+            this.getToolStripMenuItem,
+            this.generateHyperlinkToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(87, 29);
             this.actionsToolStripMenuItem.Text = "Actions";
@@ -219,16 +221,16 @@
             this.vaultNavigationPathComboboxControl1.Location = new System.Drawing.Point(99, 5);
             this.vaultNavigationPathComboboxControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.vaultNavigationPathComboboxControl1.Name = "vaultNavigationPathComboboxControl1";
-            this.vaultNavigationPathComboboxControl1.Size = new System.Drawing.Size(272, 37);
+            this.vaultNavigationPathComboboxControl1.Size = new System.Drawing.Size(272, 36);
             this.vaultNavigationPathComboboxControl1.TabIndex = 10;
             // 
             // vaultBrowserControl1
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.vaultBrowserControl1, 3);
-            this.vaultBrowserControl1.Location = new System.Drawing.Point(4, 52);
+            this.vaultBrowserControl1.Location = new System.Drawing.Point(4, 51);
             this.vaultBrowserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.vaultBrowserControl1.Name = "vaultBrowserControl1";
-            this.vaultBrowserControl1.Size = new System.Drawing.Size(497, 178);
+            this.vaultBrowserControl1.Size = new System.Drawing.Size(497, 177);
             this.vaultBrowserControl1.TabIndex = 11;
             // 
             // fileName_label
@@ -236,7 +238,7 @@
             this.fileName_label.AutoSize = true;
             this.fileName_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileName_label.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fileName_label.Location = new System.Drawing.Point(3, 235);
+            this.fileName_label.Location = new System.Drawing.Point(3, 233);
             this.fileName_label.Name = "fileName_label";
             this.fileName_label.Size = new System.Drawing.Size(89, 35);
             this.fileName_label.TabIndex = 0;
@@ -248,7 +250,7 @@
             this.revision_label.AutoSize = true;
             this.revision_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.revision_label.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.revision_label.Location = new System.Drawing.Point(3, 270);
+            this.revision_label.Location = new System.Drawing.Point(3, 268);
             this.revision_label.Name = "revision_label";
             this.revision_label.Size = new System.Drawing.Size(89, 35);
             this.revision_label.TabIndex = 2;
@@ -261,7 +263,7 @@
             this.fileType_comboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileType_comboBox.Enabled = false;
             this.fileType_comboBox.FormattingEnabled = true;
-            this.fileType_comboBox.Location = new System.Drawing.Point(98, 273);
+            this.fileType_comboBox.Location = new System.Drawing.Point(98, 271);
             this.fileType_comboBox.Name = "fileType_comboBox";
             this.fileType_comboBox.Size = new System.Drawing.Size(404, 28);
             this.fileType_comboBox.TabIndex = 3;
@@ -271,11 +273,11 @@
             this.tableLayoutPanel1.SetColumnSpan(this.m_tabControl, 3);
             this.m_tabControl.Controls.Add(this.tabPage1);
             this.m_tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_tabControl.Location = new System.Drawing.Point(4, 310);
+            this.m_tabControl.Location = new System.Drawing.Point(4, 308);
             this.m_tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.m_tabControl.Name = "m_tabControl";
             this.m_tabControl.SelectedIndex = 0;
-            this.m_tabControl.Size = new System.Drawing.Size(497, 247);
+            this.m_tabControl.Size = new System.Drawing.Size(497, 249);
             this.m_tabControl.TabIndex = 8;
             // 
             // tabPage1
@@ -285,7 +287,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(489, 214);
+            this.tabPage1.Size = new System.Drawing.Size(489, 216);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Uses";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -308,7 +310,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.fileName_multiPartTextBox, 2);
             this.fileName_multiPartTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileName_multiPartTextBox.EditMode = Autodesk.DataManagement.Client.Framework.Forms.Controls.MultiPartTextBoxControl.EditModeOption.FullEdit;
-            this.fileName_multiPartTextBox.Location = new System.Drawing.Point(101, 243);
+            this.fileName_multiPartTextBox.Location = new System.Drawing.Point(101, 241);
             this.fileName_multiPartTextBox.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.fileName_multiPartTextBox.Name = "fileName_multiPartTextBox";
             this.fileName_multiPartTextBox.Parts = ((System.Collections.Generic.IEnumerable<string>)(resources.GetObject("fileName_multiPartTextBox.Parts")));
@@ -323,7 +325,7 @@
             this.label1.Location = new System.Drawing.Point(1, 1);
             this.label1.Margin = new System.Windows.Forms.Padding(1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 45);
+            this.label1.Size = new System.Drawing.Size(93, 44);
             this.label1.TabIndex = 12;
             this.label1.Text = "Look For:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -338,7 +340,7 @@
             this.switchView_toolStripSplitButton});
             this.toolStrip1.Location = new System.Drawing.Point(375, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(130, 47);
+            this.toolStrip1.Size = new System.Drawing.Size(130, 46);
             this.toolStrip1.TabIndex = 13;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -348,7 +350,7 @@
             this.navigateBack_toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("navigateBack_toolStripButton.Image")));
             this.navigateBack_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.navigateBack_toolStripButton.Name = "navigateBack_toolStripButton";
-            this.navigateBack_toolStripButton.Size = new System.Drawing.Size(34, 42);
+            this.navigateBack_toolStripButton.Size = new System.Drawing.Size(34, 41);
             this.navigateBack_toolStripButton.Text = "Back";
             this.navigateBack_toolStripButton.Click += new System.EventHandler(this.navigateBack_toolStripButton_Click);
             // 
@@ -358,7 +360,7 @@
             this.navigateUp_toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("navigateUp_toolStripButton.Image")));
             this.navigateUp_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.navigateUp_toolStripButton.Name = "navigateUp_toolStripButton";
-            this.navigateUp_toolStripButton.Size = new System.Drawing.Size(34, 42);
+            this.navigateUp_toolStripButton.Size = new System.Drawing.Size(34, 41);
             this.navigateUp_toolStripButton.Text = "Up";
             this.navigateUp_toolStripButton.Click += new System.EventHandler(this.navigateUp_toolStripButton_Click);
             // 
@@ -368,10 +370,17 @@
             this.switchView_toolStripSplitButton.Image = global::LinkNavigator.Resource1.ViewOptions_16;
             this.switchView_toolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.switchView_toolStripSplitButton.Name = "switchView_toolStripSplitButton";
-            this.switchView_toolStripSplitButton.Size = new System.Drawing.Size(45, 42);
+            this.switchView_toolStripSplitButton.Size = new System.Drawing.Size(45, 41);
             this.switchView_toolStripSplitButton.Text = "Switch View";
             this.switchView_toolStripSplitButton.ButtonClick += new System.EventHandler(this.switchView_toolStripSplitButton_ButtonClick);
             this.switchView_toolStripSplitButton.DropDownOpening += new System.EventHandler(this.switchView_toolStripSplitButton_DropDownOpening);
+            // 
+            // generateHyperlinkToolStripMenuItem
+            // 
+            this.generateHyperlinkToolStripMenuItem.Name = "generateHyperlinkToolStripMenuItem";
+            this.generateHyperlinkToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.generateHyperlinkToolStripMenuItem.Text = "Generate Hyperlink";
+            this.generateHyperlinkToolStripMenuItem.Click += new System.EventHandler(this.generateHyperlinkToolStripMenuItem_Click);
             // 
             // vaultViewerctr
             // 
@@ -424,5 +433,6 @@
         private System.Windows.Forms.ToolStripButton navigateBack_toolStripButton;
         private System.Windows.Forms.ToolStripButton navigateUp_toolStripButton;
         private System.Windows.Forms.ToolStripSplitButton switchView_toolStripSplitButton;
+        private System.Windows.Forms.ToolStripMenuItem generateHyperlinkToolStripMenuItem;
     }
 }

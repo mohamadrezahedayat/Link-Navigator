@@ -165,7 +165,37 @@ namespace LinkNavigator.Ctr
             gridLinks.ItemsSource = newSource;
         }
 
+/// <summary>
+/// Open Vault viewer plugin from link navigator plugin and handle link
+/// </summary>
+/// <param name="link"></param>
+        private void OpenVaultPluginAndShowFile(string link)
+        {
+            if (!Autodesk.Navisworks.Api.Application.IsAutomated)
+            {
+                var pluginRecord = Autodesk.Navisworks.Api.Application.Plugins.FindPlugin("VaultViewer.MohamadrezaHedayat");
+                if (pluginRecord != null && pluginRecord is DockPanePluginRecord && pluginRecord.IsEnabled)
+                {
+                    var docPanel = (DockPanePlugin)(pluginRecord.LoadedPlugin ?? pluginRecord.LoadPlugin());
 
+                    if (docPanel != null)
+                    {
+                        //switch the Visible flag
+                        docPanel.Visible = true;
+                    }
+                }
+                var loadedPlugin = (VaultViewerPlugin)pluginRecord.LoadedPlugin;
+                vaultViewerctr vaultViewerctr = loadedPlugin.formControl;
+                vaultViewerctr.showSelectedLink(link);
+
+            }
+
+        }
+
+        /// <summary>
+        /// click handler for links
+        /// </summary>
+        /// <param name="currentLink"></param>
         private void cellClickHandler(string currentLink)
         {
             
@@ -214,28 +244,12 @@ namespace LinkNavigator.Ctr
 
             }
         }
-        private void OpenVaultPluginAndShowFile(string link)
-        {
-            if (!Autodesk.Navisworks.Api.Application.IsAutomated)
-            {
-                var pluginRecord = Autodesk.Navisworks.Api.Application.Plugins.FindPlugin("VaultViewer.MohamadrezaHedayat");
-                if (pluginRecord != null && pluginRecord is DockPanePluginRecord && pluginRecord.IsEnabled)
-                {
-                    var docPanel = (DockPanePlugin)(pluginRecord.LoadedPlugin ?? pluginRecord.LoadPlugin());
-
-                    if (docPanel != null)
-                    {
-                        //switch the Visible flag
-                        docPanel.Visible = true;
-                    }
-                }
-                var loadedPlugin = (VaultViewerPlugin)pluginRecord.LoadedPlugin;
-                vaultViewerctr vaultViewerctr = loadedPlugin.formControl;
-                vaultViewerctr.showSelectedLink(link);
-
-            }
-
-        }
+       
+        /// <summary>
+        /// click handler for grid, Select cells from overal grid visual tree
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridLinks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DependencyObject dep = (DependencyObject)e.OriginalSource;

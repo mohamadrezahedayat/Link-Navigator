@@ -84,6 +84,7 @@ namespace LinkNavigator.Ctr
             m_addFileToolStripMenuItem.Enabled = activeConnection;
             m_openFileToolStripMenuItem.Enabled = activeConnection && m_model != null && m_model.SelectedContent.FirstOrDefault() is Vault.Currency.Entities.FileIteration;
             m_advancedFindToolStripMenuItem.Enabled = activeConnection;
+            generateHyperlinkToolStripMenuItem.Enabled = activeConnection;
 
             //navigate up and back are normally handled by the model (m_model_ParentChanged), but we need to specifically disable them when we log out
             if (activeConnection == false)
@@ -283,74 +284,7 @@ namespace LinkNavigator.Ctr
                 button.Checked = button.Tag.Equals(vaultBrowserControl1.CurrentLayout);
             }
         }
-        public void showSelectedLink(string link)
-        {
-            var folderAndFiles = extractFileNameFromeLink(link);
-            if (m_conn == null)
-                login();
 
-            if (m_conn != null)
-            {
-                navigateToSelectedFile(folderAndFiles);
-
-            }
-
-        }
-
-        private void focusSelectedFile(string[] folderAndFiles, long folderId)
-        {
-            var files = m_conn.WebServiceManager.DocumentService.GetLatestFilesByFolderId(folderId, true);
-            long fileId = 1;
-            foreach (var item in files)
-            {
-                if (item.Name==folderAndFiles.Last())
-                {
-                    fileId = item.Id;
-                }
-
-
-            }
-            
-            var file = m_conn.FileManager.GetFilesByIterationIds(new List<long> { fileId }).FirstOrDefault();
-            m_model.SetSelectedContent(null, new List<IEntity> { file.Value });
-        }
-
-        private void navigateToSelectedFile(string[] folderAndFiles)
-        {
-            var folder = findParentFolder(folderAndFiles);
-            if (folder != null)
-            {
-                List<long> ids = new List<long> { folder.Id };
-
-                var entityFolder = m_conn.FolderManager.GetFoldersByIds(ids).FirstOrDefault().Value;
-
-                m_model.Navigate(entityFolder, Forms.Currency.NavigationContext.DrillDown);
-                focusSelectedFile(folderAndFiles, ids.FirstOrDefault());
-            }
-        }
-        private ACW.Folder findParentFolder(string[] fileAndFolders)
-        {
-            string path = "$";
-            for (int i = 0; i < fileAndFolders.Length - 1; i++)
-            {
-                path += "/";
-                path += fileAndFolders[i];
-            }
-            var folder = m_conn.WebServiceManager.DocumentService.GetFolderByPath(path);
-            return folder;
-        }
-
-        private string[] extractFileNameFromeLink(string link)
-        {
-            var positionStringStart = "ObjectId=%24%2f";
-            var positionStringEnd = "&ObjectType=";
-            var substring1 = link.Substring(link.IndexOf(positionStringStart) + positionStringStart.Length);
-            var substring2 = substring1.Remove(substring1.IndexOf(positionStringEnd));
-            var extractedPathReplaceSlash = substring2.Replace("%2f", "/");
-            var extractedPathReplaceplus = extractedPathReplaceSlash.Replace("+", " ");
-            var fileAndFolders = extractedPathReplaceplus.Split('/');
-            return fileAndFolders;
-        }
 
         private void m_openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -404,7 +338,7 @@ namespace LinkNavigator.Ctr
                 m_conn.FolderManager.CreateFolder(parent, form.folderName, false, category);
                 m_model.Reload();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -429,6 +363,92 @@ namespace LinkNavigator.Ctr
                     m_model.Reload();
                 }
             }
+        }
+
+        #region show and focus selected link from link navigator
+
+        private void focusSelectedFile(string[] folderAndFiles, long folderId)
+        {
+            var files = m_conn.WebServiceManager.DocumentService.GetLatestFilesByFolderId(folderId, true);
+            long fileId = 1;
+            foreach (var item in files)
+            {
+                if (item.Name == folderAndFiles.Last())
+                {
+                    fileId = item.Id;
+                }
+
+
+            }
+
+            var file = m_conn.FileManager.GetFilesByIterationIds(new List<long> { fileId }).FirstOrDefault();
+            m_model.SetSelectedContent(null, new List<IEntity> { file.Value });
+        }
+        private ACW.Folder findParentFolder(string[] fileAndFolders)
+        {
+            string path = "$";
+            for (int i = 0; i < fileAndFolders.Length - 1; i++)
+            {
+                path += "/";
+                path += fileAndFolders[i];
+            }
+            var folder = m_conn.WebServiceManager.DocumentService.GetFolderByPath(path);
+            return folder;
+        }
+        private void navigateToSelectedFile(string[] folderAndFiles)
+        {
+            var folder = findParentFolder(folderAndFiles);
+            if (folder != null)
+            {
+                List<long> ids = new List<long> { folder.Id };
+
+                var entityFolder = m_conn.FolderManager.GetFoldersByIds(ids).FirstOrDefault().Value;
+
+                m_model.Navigate(entityFolder, Forms.Currency.NavigationContext.DrillDown);
+                focusSelectedFile(folderAndFiles, ids.FirstOrDefault());
+            }
+        }
+        private string[] extractFileNameFromeLink(string link)
+        {
+            // sampleInitialLink = http://localhost/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2fFolderOne%2fvaultLogo.png&ObjectType=File&Command=Select
+            var positionStringStart = "ObjectId=%24%2f";
+            var positionStringEnd = "&ObjectType=";
+            var substring1 = link.Substring(link.IndexOf(positionStringStart) + positionStringStart.Length);
+            var substring2 = substring1.Remove(substring1.IndexOf(positionStringEnd));
+            var extractedPathReplaceSlash = substring2.Replace("%2f", "/");
+            var extractedPathReplaceplus = extractedPathReplaceSlash.Replace("+", " ");
+            var fileAndFolders = extractedPathReplaceplus.Split('/');
+            return fileAndFolders;
+        }
+
+        public void showSelectedLink(string link)
+        {
+            var folderAndFiles = extractFileNameFromeLink(link);
+            if (m_conn == null)
+                login();
+
+            if (m_conn != null)
+            {
+                navigateToSelectedFile(folderAndFiles);
+
+            }
+
+        }
+
+        #endregion
+        private void generateHyperlinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string startLinkString = @"http://localhost/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2f";
+            var folderList = m_model.NavigationPath;
+            string path = "";
+            foreach (var pathSection in folderList)
+            {
+                if (pathSection.ToString() != "$") { path += pathSection.ToString() + "%2f"; }
+            }
+            string fileName = m_model.SelectedContent.FirstOrDefault().EntityName;
+            string endLinkString = "&ObjectType=File&Command=Select";
+            path = (startLinkString + path + fileName + endLinkString).Replace(' ', '+');
+            Clipboard.SetText(path);
         }
     }
 }
