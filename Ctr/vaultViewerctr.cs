@@ -7,18 +7,24 @@ using Framework = Autodesk.DataManagement.Client.Framework;
 using Vault = Autodesk.DataManagement.Client.Framework.Vault;
 using Forms = Autodesk.DataManagement.Client.Framework.Vault.Forms;
 
+
 using Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities;
 
+using navisApp = Autodesk.Navisworks.Api.Application;
+using Autodesk.Navisworks.Api;
+
+using ComApi = Autodesk.Navisworks.Api.Interop.ComApi;
+using ComApiBridge = Autodesk.Navisworks.Api.ComApi;
 
 namespace LinkNavigator.Ctr
 {
     public partial class vaultViewerctr : UserControl
     {
         private Vault.Currency.Connections.Connection m_conn = null;
-        private Vault.Forms.Models.BrowseVaultNavigationModel m_model = null;
+        private Forms.Models.BrowseVaultNavigationModel m_model = null;
         private List<Framework.Forms.Controls.GridLayout> m_availableLayouts = new List<Framework.Forms.Controls.GridLayout>();
         private List<ToolStripMenuItem> m_viewButtons = new List<ToolStripMenuItem>();
-        private Func<Vault.Currency.Entities.IEntity, bool> m_filterCanDisplayEntity;
+        private Func<IEntity, bool> m_filterCanDisplayEntity;
 
         public vaultViewerctr()
         {
@@ -38,9 +44,8 @@ namespace LinkNavigator.Ctr
             m_filterCanDisplayEntity = filter1.CanDisplayEntity;
             controlStates(m_conn != null);
         }
-        /// <summary>
-        /// login to vault
-        /// </summary>
+
+        #region Login and Logout
         private void login()
         {
             foreach (Framework.Forms.Controls.GridLayout layout in vaultBrowserControl1.AvailableLayouts)
@@ -58,11 +63,9 @@ namespace LinkNavigator.Ctr
             if (m_conn != null)
                 initalizeGrid();
         }
-        void switchViewDropdown_itemClick(object sender, EventArgs e)
+        private void logout_toolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //switch to the exact layout that was chosen with the switch view dropdown menu
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            vaultBrowserControl1.CurrentLayout = item.Tag as Framework.Forms.Controls.GridLayout;
+            logout();
         }
         private void logout()
         {
@@ -73,6 +76,14 @@ namespace LinkNavigator.Ctr
             if (m_conn != null)
                 initalizeGrid();
         }
+        #endregion
+
+        void switchViewDropdown_itemClick(object sender, EventArgs e)
+        {
+            //switch to the exact layout that was chosen with the switch view dropdown menu
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            vaultBrowserControl1.CurrentLayout = item.Tag as Framework.Forms.Controls.GridLayout;
+        }
         private void controlStates(bool activeConnection)
         {
             login_toolStripMenuItem.Enabled = !activeConnection;
@@ -82,9 +93,16 @@ namespace LinkNavigator.Ctr
             vaultBrowserControl1.Enabled = activeConnection;
             fileType_comboBox.Enabled = activeConnection;
             m_addFileToolStripMenuItem.Enabled = activeConnection;
-            m_openFileToolStripMenuItem.Enabled = activeConnection && m_model != null && m_model.SelectedContent.FirstOrDefault() is Vault.Currency.Entities.FileIteration;
+            m_openFileToolStripMenuItem.Enabled = activeConnection && m_model != null && m_model.SelectedContent.FirstOrDefault() is FileIteration;
             m_advancedFindToolStripMenuItem.Enabled = activeConnection;
             generateHyperlinkToolStripMenuItem.Enabled = activeConnection;
+            asignLinkToNavisItemToolStripMenuItem.Enabled = activeConnection;
+            addFolderToolStripMenuItem.Enabled = activeConnection;
+            m_addFileToolStripMenuItem.Enabled = activeConnection;
+            checkOutToolStripMenuItem.Enabled = activeConnection;
+            undoCheckOutToolStripMenuItem.Enabled = activeConnection;
+            checkInToolStripMenuItem.Enabled = activeConnection;
+            getToolStripMenuItem.Enabled = activeConnection;
 
             //navigate up and back are normally handled by the model (m_model_ParentChanged), but we need to specifically disable them when we log out
             if (activeConnection == false)
@@ -263,10 +281,7 @@ namespace LinkNavigator.Ctr
             m_model.MoveUp();
         }
 
-        private void logout_toolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            logout();
-        }
+
 
         private void switchView_toolStripSplitButton_ButtonClick(object sender, EventArgs e)
         {
@@ -436,19 +451,189 @@ namespace LinkNavigator.Ctr
         }
 
         #endregion
-        private void generateHyperlinkToolStripMenuItem_Click(object sender, EventArgs e)
+
+        #region Generate Vault Link and put to Clipboard
+        private List<string> getPathList()
         {
-            string startLinkString = @"http://localhost/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2f";
-            var folderList = m_model.NavigationPath;
+            var patheList = m_model.NavigationPath;
+            var pathListString = new List<string>();
+            foreach (var path in patheList)
+            {
+                pathListString.Add(path.ToString());
+            }
+            return pathListString;
+        }
+        private string createPathString()
+        {
+            var folderList = getPathList();
             string path = "";
             foreach (var pathSection in folderList)
             {
-                if (pathSection.ToString() != "$") { path += pathSection.ToString() + "%2f"; }
+                if (pathSection != "$") { path += pathSection + "%2f"; }
             }
-            string fileName = m_model.SelectedContent.FirstOrDefault().EntityName;
-            string endLinkString = "&ObjectType=File&Command=Select";
-            path = (startLinkString + path + fileName + endLinkString).Replace(' ', '+');
-            Clipboard.SetText(path);
+            return path;
+        }
+        private string getFileName()
+        {
+            return m_model.SelectedContent.FirstOrDefault().EntityName;
+        }
+        private string generateHyperlink()
+        {
+            if (m_model.SelectedContent != null)
+            {
+                string startLinkString = @"http://localhost/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2f";
+                string endLinkString = "&ObjectType=File&Command=Select";
+                return (startLinkString + createPathString() + getFileName() + endLinkString).Replace(' ', '+');
+
+            }
+            else
+            {
+                return "No File Selected";
+            }
+        }
+        private void generateHyperlinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(generateHyperlink());
+        }
+        #endregion
+
+        #region Create list of hyperlinks
+        private List<DataProperty> getlinks()
+        {
+            var linkProps = new List<DataProperty>();
+
+            foreach (var item in Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.SelectedItems)
+            {
+                if (item.PropertyCategories.FindCategoryByDisplayName("Hyperlinks") != null)
+                {
+                    linkProps.AddRange(item.PropertyCategories.FindCategoryByDisplayName("Hyperlinks").Properties);
+                }
+            }
+            return linkProps;
+        }
+        private List<stringedLink> linkgenerator(List<DataProperty> linkprops)
+        {
+            var links = new List<stringedLink>();
+            var linkPropNames = new List<DataProperty>();
+            var linkpropUrls = new List<DataProperty>();
+            var linkPropsCategories = new List<DataProperty>();
+
+            int linkCount = linkprops.Where(i => i.DisplayName.StartsWith("Name")).Count();
+
+            linkPropNames.AddRange(linkprops.Where(i => i.DisplayName.StartsWith("Name")));
+            linkpropUrls.AddRange(linkprops.Where(i => i.DisplayName.StartsWith("URL")));
+            linkPropsCategories.AddRange(linkprops.Where(i => i.DisplayName.StartsWith("Category")));
+
+            for (int i = 0; i < linkCount; i++)
+            {
+                links.Add(new stringedLink(new Link(linkPropNames[i], linkpropUrls[i], linkPropsCategories[i])));
+            }
+            return links;
+        }
+        private List<stringedLink> getHyperlinks()
+        {
+            var linkprops = getlinks();
+            return linkgenerator(linkprops);
+
+
+        }
+
+        #endregion
+
+        #region Add Vault Link to Naviswork Item
+        private void asignLinkToNavisItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var link = generateHyperlink();
+            var label = getFileName().Split('.')[0];
+            var category = getPathList().Last();
+
+            var exLinks = getHyperlinks();
+
+            AddURL(label, link, category, exLinks);
+
+        }
+
+        private void AddURL(string name, string link, string category, List<stringedLink> exLinks)
+        {
+            ComApi.InwOpState10 state = ComApiBridge.ComApiBridge.State;
+
+            // create the hyperlink collection
+            ComApi.InwURLOverride oMyURLOoverride = (ComApi.InwURLOverride)state.ObjectFactory(ComApi.nwEObjectType.eObjectType_nwURLOverride, null, null);
+
+            foreach (var ex in exLinks)
+            {
+                // create one hyperlink
+                ComApi.InwURL2 oMyURL = (ComApi.InwURL2)state.ObjectFactory(ComApi.nwEObjectType.eObjectType_nwURL, null, null);
+
+                oMyURL.name = ex.Link_Name;
+                oMyURL.URL = ex.Link_URL;
+                oMyURL.SetCategory(ex.Link_Category, "LcOaURL" + ex.Link_Category + "Hyperlink");
+
+                // add the new hyperlink to the hyperlink collection
+                ComApi.InwURLColl oURLColl = oMyURLOoverride.URLs();
+                oURLColl.Add(oMyURL);
+
+                // get current selected items
+                ModelItemCollection modelItemCollectionIn = new ModelItemCollection(navisApp.ActiveDocument.CurrentSelection.SelectedItems);
+                //convert to InwOpSelection of COM API
+                ComApi.InwOpSelection comSelectionOut = ComApiBridge.ComApiBridge.ToInwOpSelection(modelItemCollectionIn);
+                // set the hyplerlink of the model items
+                state.SetOverrideURL(comSelectionOut, oMyURLOoverride);
+                // enable to the hyperlinks visible
+                state.URLsEnabled = true;
+            }
+
+            // create recent hyperlink
+            {
+                ComApi.InwURL2 oMyURL = (ComApi.InwURL2)state.ObjectFactory(ComApi.nwEObjectType.eObjectType_nwURL, null, null);
+
+                oMyURL.name = name;
+                oMyURL.URL = link;
+                oMyURL.SetCategory(category, "LcOaURL" + category + "Hyperlink");
+
+                // add the new hyperlink to the hyperlink collection
+                ComApi.InwURLColl oURLColl = oMyURLOoverride.URLs();
+                oURLColl.Add(oMyURL);
+
+                // get current selected items
+                ModelItemCollection modelItemCollectionIn = new ModelItemCollection(navisApp.ActiveDocument.CurrentSelection.SelectedItems);
+                //convert to InwOpSelection of COM API
+                ComApi.InwOpSelection comSelectionOut = ComApiBridge.ComApiBridge.ToInwOpSelection(modelItemCollectionIn);
+                // set the hyplerlink of the model items
+                state.SetOverrideURL(comSelectionOut, oMyURLOoverride);
+                // enable to the hyperlinks visible
+                state.URLsEnabled = true;
+            }
         }
     }
+    //private void asignLinkToNavisItemToolStripMenuItem_Click(object sender, EventArgs e)
+    //{
+
+    //    var selectedItem = navisApp.ActiveDocument.CurrentSelection.SelectedItems.FirstOrDefault();
+    //    var hyperlinkProperties = selectedItem.PropertyCategories.FindCategoryByDisplayName("Hyperlinks").Properties;
+    //    var linksCount = hyperlinkProperties.Count != 0 ? hyperlinkProperties.Count / 3 : 0;
+
+    //    var link = generateHyperlink();
+    //    var label = getFileName().Split('.')[0];
+    //    var category = getPathList().Last();
+
+    //    //AddURL(label, link, category);
+    //    //// generate url property
+    //    VariantData pathData = new VariantData(generateHyperlink());
+    //    var dataPropertyPath = new DataProperty("LcOaURLAttributeURL" + linksCount, "URL" + linksCount, pathData);
+    //    hyperlinkProperties.Add(dataPropertyPath);
+
+    //    // generate name property
+    //    VariantData nameData = new VariantData(getFileName().Split('.')[0]);
+    //    var dataPropertyName = new DataProperty("LcOaURLAttributeName" + linksCount, "Name" + linksCount, nameData);
+    //    hyperlinkProperties.Add(dataPropertyName);
+
+    //    // generate category property
+    //    VariantData categoryData = new VariantData(getPathList().Last());
+    //    var dataPropertyCategory = new DataProperty("LcOaURLAttributeCategory" + linksCount, "Category" + linksCount, categoryData);
+    //    hyperlinkProperties.Add(dataPropertyCategory);
+    //}
+    #endregion
+
 }
+

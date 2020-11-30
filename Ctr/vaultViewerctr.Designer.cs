@@ -38,11 +38,11 @@
             this.m_addFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.m_advancedFindToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changePropertyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoCheckOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateHyperlinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.vaultNavigationPathComboboxControl1 = new Autodesk.DataManagement.Client.Framework.Vault.Forms.Controls.VaultNavigationPathComboboxControl();
             this.vaultBrowserControl1 = new Autodesk.DataManagement.Client.Framework.Vault.Forms.Controls.VaultBrowserControl();
@@ -58,7 +58,7 @@
             this.navigateBack_toolStripButton = new System.Windows.Forms.ToolStripButton();
             this.navigateUp_toolStripButton = new System.Windows.Forms.ToolStripButton();
             this.switchView_toolStripSplitButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.generateHyperlinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignLinkToNavisItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.m_tabControl.SuspendLayout();
@@ -111,12 +111,12 @@
             this.m_addFileToolStripMenuItem,
             this.m_advancedFindToolStripMenuItem,
             this.addFolderToolStripMenuItem,
-            this.changePropertyToolStripMenuItem,
             this.checkOutToolStripMenuItem,
             this.undoCheckOutToolStripMenuItem,
             this.checkInToolStripMenuItem,
             this.getToolStripMenuItem,
-            this.generateHyperlinkToolStripMenuItem});
+            this.generateHyperlinkToolStripMenuItem,
+            this.asignLinkToNavisItemToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(87, 29);
             this.actionsToolStripMenuItem.Text = "Actions";
@@ -125,7 +125,7 @@
             // 
             this.m_openFileToolStripMenuItem.Enabled = false;
             this.m_openFileToolStripMenuItem.Name = "m_openFileToolStripMenuItem";
-            this.m_openFileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.m_openFileToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
             this.m_openFileToolStripMenuItem.Text = "Open File";
             this.m_openFileToolStripMenuItem.Click += new System.EventHandler(this.m_openFileToolStripMenuItem_Click);
             // 
@@ -133,7 +133,7 @@
             // 
             this.m_addFileToolStripMenuItem.Enabled = false;
             this.m_addFileToolStripMenuItem.Name = "m_addFileToolStripMenuItem";
-            this.m_addFileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.m_addFileToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
             this.m_addFileToolStripMenuItem.Text = "Add File ...";
             this.m_addFileToolStripMenuItem.Click += new System.EventHandler(this.m_addFileToolStripMenuItem_Click);
             // 
@@ -141,47 +141,48 @@
             // 
             this.m_advancedFindToolStripMenuItem.Enabled = false;
             this.m_advancedFindToolStripMenuItem.Name = "m_advancedFindToolStripMenuItem";
-            this.m_advancedFindToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.m_advancedFindToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
             this.m_advancedFindToolStripMenuItem.Text = "Advanced Find...";
             this.m_advancedFindToolStripMenuItem.Click += new System.EventHandler(this.m_advancedFindToolStripMenuItem_Click);
             // 
             // addFolderToolStripMenuItem
             // 
             this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
             this.addFolderToolStripMenuItem.Text = "Add Folder";
             this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
-            // 
-            // changePropertyToolStripMenuItem
-            // 
-            this.changePropertyToolStripMenuItem.Name = "changePropertyToolStripMenuItem";
-            this.changePropertyToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.changePropertyToolStripMenuItem.Text = "Change Property";
             // 
             // checkOutToolStripMenuItem
             // 
             this.checkOutToolStripMenuItem.Name = "checkOutToolStripMenuItem";
-            this.checkOutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.checkOutToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
             this.checkOutToolStripMenuItem.Text = "CheckOut";
             // 
             // undoCheckOutToolStripMenuItem
             // 
             this.undoCheckOutToolStripMenuItem.Name = "undoCheckOutToolStripMenuItem";
-            this.undoCheckOutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.undoCheckOutToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
             this.undoCheckOutToolStripMenuItem.Text = "Undo CheckOut";
             // 
             // checkInToolStripMenuItem
             // 
             this.checkInToolStripMenuItem.Name = "checkInToolStripMenuItem";
-            this.checkInToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.checkInToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
             this.checkInToolStripMenuItem.Text = "CheckIn";
             // 
             // getToolStripMenuItem
             // 
             this.getToolStripMenuItem.Name = "getToolStripMenuItem";
-            this.getToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.getToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
             this.getToolStripMenuItem.Text = "Get";
             this.getToolStripMenuItem.Click += new System.EventHandler(this.getToolStripMenuItem_Click);
+            // 
+            // generateHyperlinkToolStripMenuItem
+            // 
+            this.generateHyperlinkToolStripMenuItem.Name = "generateHyperlinkToolStripMenuItem";
+            this.generateHyperlinkToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
+            this.generateHyperlinkToolStripMenuItem.Text = "Generate Hyperlink";
+            this.generateHyperlinkToolStripMenuItem.Click += new System.EventHandler(this.generateHyperlinkToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -230,7 +231,7 @@
             this.vaultBrowserControl1.Location = new System.Drawing.Point(4, 51);
             this.vaultBrowserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.vaultBrowserControl1.Name = "vaultBrowserControl1";
-            this.vaultBrowserControl1.Size = new System.Drawing.Size(497, 177);
+            this.vaultBrowserControl1.Size = new System.Drawing.Size(497, 176);
             this.vaultBrowserControl1.TabIndex = 11;
             // 
             // fileName_label
@@ -238,9 +239,9 @@
             this.fileName_label.AutoSize = true;
             this.fileName_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileName_label.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fileName_label.Location = new System.Drawing.Point(3, 233);
+            this.fileName_label.Location = new System.Drawing.Point(3, 232);
             this.fileName_label.Name = "fileName_label";
-            this.fileName_label.Size = new System.Drawing.Size(89, 35);
+            this.fileName_label.Size = new System.Drawing.Size(89, 34);
             this.fileName_label.TabIndex = 0;
             this.fileName_label.Text = "File name:";
             this.fileName_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -250,9 +251,9 @@
             this.revision_label.AutoSize = true;
             this.revision_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.revision_label.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.revision_label.Location = new System.Drawing.Point(3, 268);
+            this.revision_label.Location = new System.Drawing.Point(3, 266);
             this.revision_label.Name = "revision_label";
-            this.revision_label.Size = new System.Drawing.Size(89, 35);
+            this.revision_label.Size = new System.Drawing.Size(89, 34);
             this.revision_label.TabIndex = 2;
             this.revision_label.Text = "Files of type:";
             this.revision_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -263,7 +264,7 @@
             this.fileType_comboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileType_comboBox.Enabled = false;
             this.fileType_comboBox.FormattingEnabled = true;
-            this.fileType_comboBox.Location = new System.Drawing.Point(98, 271);
+            this.fileType_comboBox.Location = new System.Drawing.Point(98, 269);
             this.fileType_comboBox.Name = "fileType_comboBox";
             this.fileType_comboBox.Size = new System.Drawing.Size(404, 28);
             this.fileType_comboBox.TabIndex = 3;
@@ -273,11 +274,11 @@
             this.tableLayoutPanel1.SetColumnSpan(this.m_tabControl, 3);
             this.m_tabControl.Controls.Add(this.tabPage1);
             this.m_tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_tabControl.Location = new System.Drawing.Point(4, 308);
+            this.m_tabControl.Location = new System.Drawing.Point(4, 305);
             this.m_tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.m_tabControl.Name = "m_tabControl";
             this.m_tabControl.SelectedIndex = 0;
-            this.m_tabControl.Size = new System.Drawing.Size(497, 249);
+            this.m_tabControl.Size = new System.Drawing.Size(497, 252);
             this.m_tabControl.TabIndex = 8;
             // 
             // tabPage1
@@ -287,7 +288,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(489, 216);
+            this.tabPage1.Size = new System.Drawing.Size(489, 219);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Uses";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -310,11 +311,11 @@
             this.tableLayoutPanel1.SetColumnSpan(this.fileName_multiPartTextBox, 2);
             this.fileName_multiPartTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileName_multiPartTextBox.EditMode = Autodesk.DataManagement.Client.Framework.Forms.Controls.MultiPartTextBoxControl.EditModeOption.FullEdit;
-            this.fileName_multiPartTextBox.Location = new System.Drawing.Point(101, 241);
+            this.fileName_multiPartTextBox.Location = new System.Drawing.Point(101, 240);
             this.fileName_multiPartTextBox.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.fileName_multiPartTextBox.Name = "fileName_multiPartTextBox";
             this.fileName_multiPartTextBox.Parts = ((System.Collections.Generic.IEnumerable<string>)(resources.GetObject("fileName_multiPartTextBox.Parts")));
-            this.fileName_multiPartTextBox.Size = new System.Drawing.Size(398, 19);
+            this.fileName_multiPartTextBox.Size = new System.Drawing.Size(398, 18);
             this.fileName_multiPartTextBox.TabIndex = 2;
             // 
             // label1
@@ -375,12 +376,12 @@
             this.switchView_toolStripSplitButton.ButtonClick += new System.EventHandler(this.switchView_toolStripSplitButton_ButtonClick);
             this.switchView_toolStripSplitButton.DropDownOpening += new System.EventHandler(this.switchView_toolStripSplitButton_DropDownOpening);
             // 
-            // generateHyperlinkToolStripMenuItem
+            // asignLinkToNavisItemToolStripMenuItem
             // 
-            this.generateHyperlinkToolStripMenuItem.Name = "generateHyperlinkToolStripMenuItem";
-            this.generateHyperlinkToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.generateHyperlinkToolStripMenuItem.Text = "Generate Hyperlink";
-            this.generateHyperlinkToolStripMenuItem.Click += new System.EventHandler(this.generateHyperlinkToolStripMenuItem_Click);
+            this.asignLinkToNavisItemToolStripMenuItem.Name = "asignLinkToNavisItemToolStripMenuItem";
+            this.asignLinkToNavisItemToolStripMenuItem.Size = new System.Drawing.Size(304, 34);
+            this.asignLinkToNavisItemToolStripMenuItem.Text = "Asign Link To navis Item";
+            this.asignLinkToNavisItemToolStripMenuItem.Click += new System.EventHandler(this.asignLinkToNavisItemToolStripMenuItem_Click);
             // 
             // vaultViewerctr
             // 
@@ -413,7 +414,6 @@
         private System.Windows.Forms.ToolStripMenuItem m_addFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem m_advancedFindToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addFolderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem changePropertyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoCheckOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkInToolStripMenuItem;
@@ -434,5 +434,6 @@
         private System.Windows.Forms.ToolStripButton navigateUp_toolStripButton;
         private System.Windows.Forms.ToolStripSplitButton switchView_toolStripSplitButton;
         private System.Windows.Forms.ToolStripMenuItem generateHyperlinkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asignLinkToNavisItemToolStripMenuItem;
     }
 }

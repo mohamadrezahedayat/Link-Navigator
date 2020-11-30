@@ -16,55 +16,35 @@ namespace LinkNavigator.Ctr
     /// <summary>
     /// Interaction logic for LinkNavigatorWPFCtr.xaml
     /// </summary>
+    /// 
+
     public partial class LinkNavigatorWPFCtr : UserControl
     {
-        public class Link
-        {
-            public DataProperty Name { get; set; }
-            public DataProperty URL { get; set; }
-            public DataProperty Category { get; set; }
 
-            public Link(DataProperty name, DataProperty url, DataProperty category)
-            {
-                this.Name = name;
-                this.URL = url;
-                this.Category = category;
-            }
-        }
-        public class stringedLink
-        {
-            public string Link_Name { get; set; }
-            public string Link_URL { get; set; }
-            public string Link_Category { get; set; }
-
-
-            public stringedLink(Link link)
-            {
-                this.Link_Name = GetPropertyValue(link.Name);
-                this.Link_URL = GetPropertyValue(link.URL);
-                this.Link_Category = GetPropertyValue(link.Category).Split('(')[1].Split(')')[0];
-
-            }
-        }
-
-
+        #region Constructor
         public LinkNavigatorWPFCtr()
         {
             InitializeComponent();
             ListenSelection(null, null);
             Autodesk.Navisworks.Api.Application.ActiveDocumentChanged += ListenSelection;
         }
+        #endregion
 
-
-        public void getHyperlinks(object sender, EventArgs e)
+        #region Link Navigator Plugin
+        private List<DataProperty> getlinks()
         {
-            var linkprops = getlinks();
-            var links = linkgenerator(linkprops);
-            gridLinks.ItemsSource = links;
+            var linkProps = new List<DataProperty>();
 
-
+            foreach (var item in Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.SelectedItems)
+            {
+                if (item.PropertyCategories.FindCategoryByDisplayName("Hyperlinks") != null)
+                {
+                    linkProps.AddRange(item.PropertyCategories.FindCategoryByDisplayName("Hyperlinks").Properties);
+                }
+            }
+            return linkProps;
         }
-        public List<stringedLink> linkgenerator(List<DataProperty> linkprops)
+        private List<stringedLink> linkgenerator(List<DataProperty> linkprops)
         {
             var links = new List<stringedLink>();
             var linkPropNames = new List<DataProperty>();
@@ -83,23 +63,20 @@ namespace LinkNavigator.Ctr
             }
             return links;
         }
-
-
-
-        private List<DataProperty> getlinks()
+        private void getHyperlinks(object sender, EventArgs e)
         {
-            var linkProps = new List<DataProperty>();
+            var linkprops = getlinks();
+            var links = linkgenerator(linkprops);
+            gridLinks.ItemsSource = links;
 
-            foreach (var item in Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.SelectedItems)
-            {
-                if (item.PropertyCategories.FindCategoryByDisplayName("Hyperlinks") != null)
-                {
-                    linkProps.AddRange(item.PropertyCategories.FindCategoryByDisplayName("Hyperlinks").Properties);
-                }
-            }
-            return linkProps;
+
         }
-
+        private void clearField(object sender, EventArgs e)
+        {
+            txtCategory.Text = string.Empty;
+            txtUrlFilter.Text = string.Empty;
+            txtNameFilter.Text = string.Empty;
+        }
         private void ListenSelection(object sender, EventArgs e)
         {
             try
@@ -115,18 +92,9 @@ namespace LinkNavigator.Ctr
             }
 
         }
+        #endregion
 
-        private void clearField(object sender, EventArgs e)
-        {
-            txtCategory.Text = string.Empty;
-            txtUrlFilter.Text = string.Empty;
-            txtNameFilter.Text = string.Empty;
-        }
-
-        private static string GetPropertyValue(DataProperty prop)
-        {
-            return prop.Value.IsDisplayString ? prop.Value.ToDisplayString() : prop.Value.ToString().Split(':')[1];
-        }
+        #region Finder text field change events
         private void txtNameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             var linkprops = getlinks();
@@ -164,11 +132,13 @@ namespace LinkNavigator.Ctr
                              select i).ToList();
             gridLinks.ItemsSource = newSource;
         }
+        #endregion
 
-/// <summary>
-/// Open Vault viewer plugin from link navigator plugin and handle link
-/// </summary>
-/// <param name="link"></param>
+        #region Vault link click handler
+        /// <summary>
+        /// Open Vault viewer plugin from link navigator plugin and handle link
+        /// </summary>
+        /// <param name="link"></param>
         private void OpenVaultPluginAndShowFile(string link)
         {
             if (!Autodesk.Navisworks.Api.Application.IsAutomated)
@@ -198,7 +168,7 @@ namespace LinkNavigator.Ctr
         /// <param name="currentLink"></param>
         private void cellClickHandler(string currentLink)
         {
-            
+
             if (!String.IsNullOrWhiteSpace(currentLink))
             {
                 if (currentLink.Contains("/AutodeskDM/Services/"))
@@ -210,10 +180,10 @@ namespace LinkNavigator.Ctr
                     catch (Exception)
                     {
 
-                       
+
                     }
                 }
-                else if ( currentLink.StartsWith("www") || currentLink.StartsWith("http"))
+                else if (currentLink.StartsWith("www") || currentLink.StartsWith("http"))
                 {
                     try
                     {
@@ -224,7 +194,7 @@ namespace LinkNavigator.Ctr
 
 
                     }
-                   
+
 
                 }
                 else
@@ -236,15 +206,15 @@ namespace LinkNavigator.Ctr
                     catch (Exception)
                     {
 
-                      
+
                     }
-                    
+
                 }
 
 
             }
         }
-       
+
         /// <summary>
         /// click handler for grid, Select cells from overal grid visual tree
         /// </summary>
@@ -266,10 +236,12 @@ namespace LinkNavigator.Ctr
             if (dep is DataGridCell)
             {
                 DataGridCell cell = dep as DataGridCell;
-              link = cell.ToString().Substring(("System.Windows.Controls.DataGridCell: ").Length );
-                
-            cellClickHandler(link);
+                link = cell.ToString().Substring(("System.Windows.Controls.DataGridCell: ").Length);
+
+                cellClickHandler(link);
             }
         }
+
+        #endregion
     }
 }
