@@ -29,7 +29,7 @@
             <TextBox x:Name="txtCategory" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="1" TextChanged="txtCategory_TextChanged"/>
             <TextBlock Text="URL :" Grid.Row="3" Grid.Column="0" Margin="1"   />
             <TextBox x:Name="txtUrlFilter" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="1" TextChanged="txtUrlFilter_TextChanged"/>
-            <DataGrid x:Name="gridLinks" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" MinHeight="200" Width="auto" Margin="10" MouseDoubleClick="gridLinks_MouseDoubleClick" IsReadOnly="True"/>
+            <DataGrid x:Name="gridLinks" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" MinHeight="200" Width="auto" Height="201" Margin="10" MouseDoubleClick="gridLinks_MouseDoubleClick" IsReadOnly="True" VerticalScrollBarVisibility="Visible"/>
         </Grid>
     </DockPanel>
 </UserControl>

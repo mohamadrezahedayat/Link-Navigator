@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,19 +44,19 @@
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\AdWindows.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.Connectivity.WebServices">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.Connectivity.WebServices.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.Connectivity.WebServices.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.DataManagement.Client.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework.Forms">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.Forms.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.DataManagement.Client.Framework.Forms.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework.Vault">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.Vault.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.DataManagement.Client.Framework.Vault.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework.Vault.Forms">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.Vault.Forms.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.DataManagement.Client.Framework.Vault.Forms.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.Navisworks.Api">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Autodesk.Navisworks.Api.dll</HintPath>
@@ -66,10 +66,6 @@
     </Reference>
     <Reference Include="Autodesk.Navisworks.Interop.ComApi">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Autodesk.Navisworks.Interop.ComApi.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Autodesk.Navisworks.Interop.ComApiAutomation">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Autodesk.Navisworks.Interop.ComApiAutomation.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -82,6 +78,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -96,46 +93,55 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddFileCommand.cs" />
-    <Compile Include="Condition.cs" />
-    <Compile Include="Ctr\LinkNavigatorWPFCtr.xaml.cs">
-      <DependentUpon>LinkNavigatorWPFCtr.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ctr\vaultViewerctr.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Ctr\vaultViewerctr.Designer.cs">
-      <DependentUpon>vaultViewerctr.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FileNameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FileNameForm.Designer.cs">
-      <DependentUpon>FileNameForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FinderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Link.cs" />
-    <Compile Include="LinkNavigatorPlugin.cs" />
-    <Compile Include="ListBoxItems.cs" />
-    <Compile Include="OpenFileCommand.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="GltfExporterPlugin\NavisGeometry.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="VaultPlugin\AddFileCommand.cs" />
+    <Compile Include="VaultPlugin\Condition.cs" />
+    <Compile Include="GltfExporterPlugin\Ctr\GltfExporterCtr.xaml.cs">
+      <DependentUpon>GltfExporterCtr.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LinkNavigatorPlugin\Ctr\LinkNavigatorWPFCtr.xaml.cs">
+      <DependentUpon>LinkNavigatorWPFCtr.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VaultPlugin\Ctr\vaultViewerctr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VaultPlugin\Ctr\vaultViewerctr.Designer.cs">
+      <DependentUpon>vaultViewerctr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VaultPlugin\Ctr\FolderNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VaultPlugin\Ctr\FolderNameForm.Designer.cs">
+      <DependentUpon>FolderNameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VaultPlugin\Ctr\FinderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GltfExporterPlugin\GltfExporterPlugin.cs" />
+    <Compile Include="LinkNavigatorPlugin\Link.cs" />
+    <Compile Include="LinkNavigatorPlugin\LinkNavigatorPlugin.cs" />
+    <Compile Include="VaultPlugin\ListBoxItems.cs" />
+    <Compile Include="VaultPlugin\OpenFileCommand.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SbrToolsCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VaultViewerPlugin.cs" />
+    <Compile Include="VaultPlugin\VaultViewerPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Ctr\LinkNavigatorWPFCtr.xaml">
+    <Page Include="GltfExporterPlugin\Ctr\GltfExporterCtr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LinkNavigatorPlugin\Ctr\LinkNavigatorWPFCtr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +151,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Resources\Back_16.png" />
   </ItemGroup>
   <ItemGroup>
@@ -154,13 +161,13 @@
     <None Include="Resources\ViewOptions_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Ctr\vaultViewerctr.resx">
+    <EmbeddedResource Include="VaultPlugin\Ctr\vaultViewerctr.resx">
       <DependentUpon>vaultViewerctr.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FileNameForm.resx">
-      <DependentUpon>FileNameForm.cs</DependentUpon>
+    <EmbeddedResource Include="VaultPlugin\Ctr\FolderNameForm.resx">
+      <DependentUpon>FolderNameForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FinderForm.resx">
+    <EmbeddedResource Include="VaultPlugin\Ctr\FinderForm.resx">
       <DependentUpon>FinderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -174,10 +181,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set path=C:\Users\data\Desktop\navis project\LinkNavigator\Ribbon.xaml
+    <PostBuildEvent>set path=$(ProjectDir)Ribbon.xaml
 
-set addinPath=C:\Program Files\Autodesk\Navisworks Manage 2018\Plugins\LinkNavigator\
-set addinPath1=C:\Program Files\Autodesk\Navisworks Manage 2018\Plugins\LinkNavigator\en-US\
+set addinPath=$(TargetDir)
+set addinPath1=$(TargetDir)en-US\
 
 mkdir "%25addinPath1%25"
 
@@ -185,7 +192,10 @@ copy /Y "%25path%25" "%25addinPath%25"
 copy /Y "%25path%25" "%25addinPath1%25"
 
 set path2=C:\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\clmloader.dll
-copy /Y "%25path2%25" "%25addinPath%25"
-</PostBuildEvent>
+copy /Y "%25path2%25" "%25addinPath%25"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

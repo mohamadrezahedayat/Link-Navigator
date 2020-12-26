@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace LinkNavigator
 {
-    public partial class FileNameForm : Form
+    public partial class FolderNameForm : Form
     {
         public string folderName { get { return m_folderTitleTextBox.Text; } }
-        public FileNameForm()
+        public FolderNameForm()
         {
             InitializeComponent();
 

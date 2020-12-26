@@ -1,6 +1,6 @@
 ﻿namespace LinkNavigator
 {
-    partial class FileNameForm
+    partial class FolderNameForm
     {
         /// <summary>
         /// Required designer variable.

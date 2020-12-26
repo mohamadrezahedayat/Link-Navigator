@@ -342,7 +342,7 @@ namespace LinkNavigator.Ctr
         }
         private void CreateFolder()
         {
-            FileNameForm form = new FileNameForm();
+            FolderNameForm form = new FolderNameForm();
             form.ShowDialog();
             if (form.DialogResult != DialogResult.OK)
                 return;

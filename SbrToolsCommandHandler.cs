@@ -12,6 +12,7 @@ namespace LinkNavigator
     //add other commands here
     [Command("btnLinks", Icon = "link_16.jpg", LargeIcon = "link_32.jpg", ToolTip = "NavisWorks Links Navigator")]
     [Command("btnVault", Icon = "vault16x16.png", LargeIcon = "vault32x32.png", ToolTip = "Vault Viewer Plugin")]
+    [Command("btnGltf", Icon = "gltf16x16.png", LargeIcon = "gltf32x32.png", ToolTip = "Gltf Exporter")]
 
     public class SbrToolsCommandHandler : CommandHandlerPlugin
     {
@@ -40,6 +41,22 @@ namespace LinkNavigator
                     if (!Autodesk.Navisworks.Api.Application.IsAutomated)
                     {
                         var pluginRecord = Autodesk.Navisworks.Api.Application.Plugins.FindPlugin("VaultViewer.MohamadrezaHedayat");
+                        if (pluginRecord != null && pluginRecord is DockPanePluginRecord && pluginRecord.IsEnabled)
+                        {
+                            var docPanel = (DockPanePlugin)(pluginRecord.LoadedPlugin ?? pluginRecord.LoadPlugin());
+
+                            if (docPanel != null)
+                            {
+                                //switch the Visible flag
+                                docPanel.Visible = !docPanel.Visible;
+                            }
+                        }
+                    }
+                    break;
+                case "btnGltf":
+                    if (!Autodesk.Navisworks.Api.Application.IsAutomated)
+                    {
+                        var pluginRecord = Autodesk.Navisworks.Api.Application.Plugins.FindPlugin("gltfExporter.MohamadrezaHedayat");
                         if (pluginRecord != null && pluginRecord is DockPanePluginRecord && pluginRecord.IsEnabled)
                         {
                             var docPanel = (DockPanePlugin)(pluginRecord.LoadedPlugin ?? pluginRecord.LoadPlugin());
