@@ -20,7 +20,8 @@ namespace LinkNavigator.Ctr
 
     public partial class LinkNavigatorWPFCtr : UserControl
     {
-
+        public string path;
+        public string vaultAddress;
         #region Constructor
         public LinkNavigatorWPFCtr()
         {
@@ -76,6 +77,7 @@ namespace LinkNavigator.Ctr
             txtCategory.Text = string.Empty;
             txtUrlFilter.Text = string.Empty;
             txtNameFilter.Text = string.Empty;
+            txtVaultAddress.Text = string.Empty;
         }
         private void ListenSelection(object sender, EventArgs e)
         {
@@ -171,7 +173,7 @@ namespace LinkNavigator.Ctr
 
             if (!String.IsNullOrWhiteSpace(currentLink))
             {
-                if (currentLink.Contains("/AutodeskDM/Services/"))
+                if (currentLink.Contains("$/"))
                 {
                     try
                     {
@@ -222,8 +224,15 @@ namespace LinkNavigator.Ctr
         /// <param name="e"></param>
         private void gridLinks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            cellClickHandler(path);
+        }
+
+        #endregion
+
+        private void gridLinks_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
             DependencyObject dep = (DependencyObject)e.OriginalSource;
-            string link;
+
             // iteratively traverse the visual tree
             while ((dep != null) && !(dep is DataGridCell) && !(dep is DataGridColumnHeader))
             {
@@ -236,12 +245,43 @@ namespace LinkNavigator.Ctr
             if (dep is DataGridCell)
             {
                 DataGridCell cell = dep as DataGridCell;
-                link = cell.ToString().Substring(("System.Windows.Controls.DataGridCell: ").Length);
+                path = cell.ToString().Substring(("System.Windows.Controls.DataGridCell: ").Length);
 
-                cellClickHandler(link);
+
             }
+            string server = txtVaultServer.Text != string.Empty ? txtVaultServer.Text : "localhost";
+            var pathString = path.Replace("/", "%2f");
+            vaultAddress = generateVaultHyperlink(server, pathString);
+            txtVaultAddress.Text = vaultAddress;
+
+        }
+        private string generateVaultHyperlink(string server, string pathString)
+        {
+
+            if (path != null)
+            {
+
+                string startLinkString = "http://" + server + "/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2f";
+                string endLinkString = "&ObjectType=File&Command=Select";
+                return (startLinkString + pathString + endLinkString).Replace(' ', '+');
+            }
+            else
+            {
+                return "";
+            }
+
+
+
+
         }
 
-        #endregion
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (vaultAddress != null)
+            {
+                Clipboard.SetText(vaultAddress);
+            }
+
+        }
     }
 }

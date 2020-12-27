@@ -425,15 +425,22 @@ namespace LinkNavigator.Ctr
         }
         private string[] extractFileNameFromeLink(string link)
         {
-            // sampleInitialLink = http://localhost/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2fFolderOne%2fvaultLogo.png&ObjectType=File&Command=Select
-            var positionStringStart = "ObjectId=%24%2f";
-            var positionStringEnd = "&ObjectType=";
+            //// sampleInitialLink = http://localhost/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2fFolderOne%2fvaultLogo.png&ObjectType=File&Command=Select
+            //var positionStringStart = "ObjectId=%24%2f";
+            //var positionStringEnd = "&ObjectType=";
+            //var substring1 = link.Substring(link.IndexOf(positionStringStart) + positionStringStart.Length);
+            //var substring2 = substring1.Remove(substring1.IndexOf(positionStringEnd));
+            //var extractedPathReplaceSlash = substring2.Replace("%2f", "/");
+            //var extractedPathReplaceplus = extractedPathReplaceSlash.Replace("+", " ");
+            //var fileAndFolders = extractedPathReplaceplus.Split('/');
+            //return fileAndFolders;
+
+            var positionStringStart = "$/";
             var substring1 = link.Substring(link.IndexOf(positionStringStart) + positionStringStart.Length);
-            var substring2 = substring1.Remove(substring1.IndexOf(positionStringEnd));
-            var extractedPathReplaceSlash = substring2.Replace("%2f", "/");
-            var extractedPathReplaceplus = extractedPathReplaceSlash.Replace("+", " ");
-            var fileAndFolders = extractedPathReplaceplus.Split('/');
+            var fileAndFolders = substring1.Split('/');
             return fileAndFolders;
+
+
         }
 
         public void showSelectedLink(string link)
@@ -444,7 +451,8 @@ namespace LinkNavigator.Ctr
 
             if (m_conn != null)
             {
-                navigateToSelectedFile(folderAndFiles);
+                if (folderAndFiles.Length != 0)
+                    navigateToSelectedFile(folderAndFiles);
 
             }
 
@@ -473,17 +481,29 @@ namespace LinkNavigator.Ctr
             }
             return path;
         }
+        private string createPathStringNormal()
+        {
+            var folderList = getPathList();
+            string path = "";
+            foreach (var pathSection in folderList)
+            {
+                if (pathSection != "$") { path += pathSection + "/"; }
+            }
+            return path;
+        }
         private string getFileName()
         {
             return m_model.SelectedContent.FirstOrDefault().EntityName;
         }
-        private string generateHyperlink()
+        private string generateVaultHyperlink()
         {
             if (m_model.SelectedContent != null)
             {
+
                 string startLinkString = @"http://localhost/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2f";
                 string endLinkString = "&ObjectType=File&Command=Select";
                 return (startLinkString + createPathString() + getFileName() + endLinkString).Replace(' ', '+');
+
 
             }
             else
@@ -491,6 +511,21 @@ namespace LinkNavigator.Ctr
                 return "No File Selected";
             }
         }
+        private string generateHyperlink()
+        {
+            if (m_model.SelectedContent != null)
+            {
+
+                return ("$/" + createPathStringNormal() + getFileName());
+
+
+            }
+            else
+            {
+                return "No File Selected";
+            }
+        }
+
         private void generateHyperlinkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(generateHyperlink());

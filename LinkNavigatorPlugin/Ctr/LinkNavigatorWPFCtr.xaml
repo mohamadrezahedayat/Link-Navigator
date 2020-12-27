@@ -5,31 +5,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkNavigator.Ctr"
              mc:Ignorable="d" 
-             x:Name="UserControl"
-             d:DesignHeight="300" Width="300" >
-    <DockPanel Margin="5">
-        <Grid DockPanel.Dock="Right">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="5" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition MinWidth="60" Width="*" />
-                <ColumnDefinition MinWidth="100" Width="3*"  />
-                <ColumnDefinition Width="*"  />
-                <ColumnDefinition Width="*"  />
+             x:Name="UserControl" Width="300" Height="300" >
+    <TabControl>
+        <TabItem Header="General">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition  />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition MinWidth="100" Width="3*"  />
+                    <ColumnDefinition Width="*"  />
+                    <ColumnDefinition Width="*"  />
+                </Grid.ColumnDefinitions>
 
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Name :" Grid.Row="1" Grid.Column="0" Margin="1"    />
-            <TextBox x:Name="txtNameFilter" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="1" TextChanged="txtNameFilter_TextChanged"/>
-            <TextBlock Text="Category :" Grid.Row="2" Grid.Column="0" Margin="1"   />
-            <TextBox x:Name="txtCategory" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="1" TextChanged="txtCategory_TextChanged"/>
-            <TextBlock Text="URL :" Grid.Row="3" Grid.Column="0" Margin="1"   />
-            <TextBox x:Name="txtUrlFilter" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="1" TextChanged="txtUrlFilter_TextChanged"/>
-            <DataGrid x:Name="gridLinks" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" MinHeight="200" Width="auto" Height="201" Margin="10" MouseDoubleClick="gridLinks_MouseDoubleClick" IsReadOnly="True" VerticalScrollBarVisibility="Visible"/>
-        </Grid>
-    </DockPanel>
+                <TextBlock Text="Name :"  />
+                <TextBox x:Name="txtNameFilter" Grid.Column="1"  Margin="2" TextChanged="txtNameFilter_TextChanged"/>
+                <TextBlock Text="Category :" Grid.Row="1" Grid.Column="0" Margin="2"   />
+                <TextBox x:Name="txtCategory" Grid.Row="1" Grid.Column="1"  Margin="2" TextChanged="txtCategory_TextChanged"/>
+                <TextBlock Text="URL :" Grid.Row="2" Grid.Column="0" Margin="2"   />
+                <TextBox x:Name="txtUrlFilter" Grid.Row="2" Grid.Column="1"  Margin="2" TextChanged="txtUrlFilter_TextChanged"/>
+                <TextBlock Text="Vault Link:" Grid.Row="4" Grid.Column="0" Margin="2"   />
+                <TextBox x:Name="txtVaultAddress" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="2" IsReadOnly="True"/>
+                <Button Grid.Row="4" Grid.Column="4" Margin="2" FontSize="10">Copy</Button>
+
+
+                <DockPanel Margin="5" LastChildFill="True" Grid.Row="5"  Grid.ColumnSpan="4">
+                    <DataGrid DockPanel.Dock="Bottom" x:Name="gridLinks"  MinHeight="200"  Margin="0 10 0 0" MouseDoubleClick="gridLinks_MouseDoubleClick" IsReadOnly="True" VerticalScrollBarVisibility="Visible" MouseLeftButtonDown="gridLinks_MouseLeftButtonDown"/>
+                </DockPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Settings">
+            <DockPanel LastChildFill="False">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="24" Margin="10 ">
+                    <TextBlock Text="Vault Server:"   Margin="2 2 5 2"  />
+                    <TextBox x:Name="txtVaultServer" Margin="2" MinWidth="150" Text="127.0.0.1" />
+                </StackPanel>
+            </DockPanel>
+        </TabItem>
+    </TabControl>
+
 </UserControl>
