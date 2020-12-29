@@ -14,6 +14,11 @@ namespace LinkNavigator
     [Command("btnVault", Icon = "vault16x16.png", LargeIcon = "vault32x32.png", ToolTip = "Vault Viewer Plugin")]
     [Command("btnGltf", Icon = "gltf16x16.png", LargeIcon = "gltf32x32.png", ToolTip = "Gltf Exporter")]
 
+    [Command("addParent", Icon = "addParentx16.png", LargeIcon = "addParentx32.png", ToolTip = "Add Parent")]
+    [Command("selectParent", Icon = "goParentx16.png", LargeIcon = "goParentx32.png", ToolTip = "Select Parent")]
+    [Command("selectChilds", Icon = "gochildx16.png", LargeIcon = "gochildx32.png", ToolTip = "Select Childs")]
+    [Command("addChilds", Icon = "addchildx16.png", LargeIcon = "addchildx32.png", ToolTip = "Add Childs")]
+
     public class SbrToolsCommandHandler : CommandHandlerPlugin
     {
         public override int ExecuteCommand(string name, params string[] parameters)
@@ -66,6 +71,58 @@ namespace LinkNavigator
                                 //switch the Visible flag
                                 docPanel.Visible = !docPanel.Visible;
                             }
+                        }
+                    }
+                    break;
+                case "selectParent":
+                    if (!Autodesk.Navisworks.Api.Application.IsAutomated)
+                    {
+                        try
+                        {
+                            SelectionTool.SelectionToolPlugin.goToParent();
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    break;
+                case "addParent":
+                    if (!Autodesk.Navisworks.Api.Application.IsAutomated)
+                    {
+                        try
+                        {
+                            SelectionTool.SelectionToolPlugin.addParent();
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    break;
+                case "selectChilds":
+                    if (!Autodesk.Navisworks.Api.Application.IsAutomated)
+                    {
+                        try
+                        {
+                            SelectionTool.SelectionToolPlugin.selectChilds();
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    break;
+                case "addChilds":
+                    if (!Autodesk.Navisworks.Api.Application.IsAutomated)
+                    {
+                        try
+                        {
+                            SelectionTool.SelectionToolPlugin.addChilds();
+                        }
+                        catch
+                        {
+
                         }
                     }
                     break;

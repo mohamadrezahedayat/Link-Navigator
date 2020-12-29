@@ -42,39 +42,46 @@
   <ItemGroup>
     <Reference Include="AdWindows">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\AdWindows.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.Connectivity.WebServices">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.Connectivity.WebServices.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.DataManagement.Client.Framework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework.Forms">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.DataManagement.Client.Framework.Forms.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework.Vault">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.DataManagement.Client.Framework.Vault.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework.Vault.Forms">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Vault Professional 2018\Explorer\Autodesk.DataManagement.Client.Framework.Vault.Forms.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.Navisworks.Api">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Autodesk.Navisworks.Api.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.Navisworks.ComApi">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Autodesk.Navisworks.ComApi.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.Navisworks.Interop.ComApi">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Autodesk.Navisworks.Interop.ComApi.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="navisworks.gui.roamer">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\navisworks.gui.roamer.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RibbonControlsLibrary, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -99,6 +106,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="SelectionTool\SelectionToolPlugin.cs" />
     <Compile Include="VaultPlugin\AddFileCommand.cs" />
     <Compile Include="VaultPlugin\Condition.cs" />
     <Compile Include="GltfExporterPlugin\Ctr\GltfExporterCtr.xaml.cs">
@@ -179,6 +187,28 @@
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\addchildx16.png" />
+    <Content Include="images\addchildx32.png" />
+    <Content Include="images\addparent16.png" />
+    <Content Include="images\addparentx32.png" />
+    <Content Include="images\gltf16x16.png" />
+    <Content Include="images\gltf32x32.png" />
+    <Content Include="images\gochildx16.png" />
+    <Content Include="images\gochildx32.png" />
+    <Content Include="images\goparentx16.png" />
+    <Content Include="images\goparentx32.png" />
+    <Content Include="images\link_16.jpg" />
+    <Content Include="images\link_32.jpg" />
+    <Content Include="images\property.png" />
+    <Content Include="images\property_16.png" />
+    <Content Include="images\property_32.png" />
+    <Content Include="images\update.png" />
+    <Content Include="images\update_16.png" />
+    <Content Include="images\update_32.png" />
+    <Content Include="images\vault16x16.png" />
+    <Content Include="images\vault32x32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set path=$(ProjectDir)Ribbon.xaml
@@ -192,7 +222,8 @@ copy /Y "%25path%25" "%25addinPath%25"
 copy /Y "%25path%25" "%25addinPath1%25"
 
 set path2=C:\Program Files (x86)\Autodesk\Autodesk Vault 2018 SDK\bin\x64\clmloader.dll
-copy /Y "%25path2%25" "%25addinPath%25"</PostBuildEvent>
+copy /Y "%25path2%25" "%25addinPath%25"
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

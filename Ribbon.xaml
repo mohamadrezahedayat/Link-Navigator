@@ -27,13 +27,44 @@
                                       Orientation="Horizontal"/>
             </RibbonPanelSource>
         </RibbonPanel>
-        <RibbonPanel x:Uid="RibbonPanel_2">
-            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_2" KeyTip="r3" Title="Gltf">
+        <RibbonPanel x:Uid="RibbonPanel_3">
+            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_3" KeyTip="r3" Title="Gltf">
                 <local:NWRibbonButton x:Uid="Button_3" Id="btnGltf"
                                       Size="Large"
                                       KeyTip="B3"
                                       ShowText="True" 
                                       Text="Gltf Exporter"
+                                      Orientation="Horizontal"/>
+            </RibbonPanelSource>
+        </RibbonPanel>
+        <RibbonPanel x:Uid="RibbonPanel_4">
+            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_4" KeyTip="r4" Title="SelectionTool">
+                <local:NWRibbonButton x:Uid="Button_4" Id="addParent"
+                                      Size="Large"
+                                      KeyTip="B4"
+                                      ShowText="True" 
+                                      Text="Add Parent"
+                                      Orientation="Horizontal"/>
+                
+                <local:NWRibbonButton x:Uid="Button_5" Id="selectParent"
+                                      Size="Large"
+                                      KeyTip="B5"
+                                      ShowText="True" 
+                                      Text="Go Parent"
+                                      Orientation="Horizontal"/>
+                
+                <local:NWRibbonButton x:Uid="Button_6" Id="selectChilds"
+                                      Size="Large"
+                                      KeyTip="B6"
+                                      ShowText="True" 
+                                      Text="Select Childs"
+                                      Orientation="Horizontal"/>
+                
+                <local:NWRibbonButton x:Uid="Button_7" Id="addChilds"
+                                      Size="Large"
+                                      KeyTip="B7"
+                                      ShowText="True" 
+                                      Text="Add Childs"
                                       Orientation="Horizontal"/>
             </RibbonPanelSource>
         </RibbonPanel>
