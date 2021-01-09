@@ -68,6 +68,16 @@
                                       Orientation="Horizontal"/>
             </RibbonPanelSource>
         </RibbonPanel>
+        <RibbonPanel x:Uid="RibbonPanel_5">
+            <RibbonPanelSource x:Uid="RibbonPanelSource_RibbonPanel_5" KeyTip="r5" Title="DataTools">
+                <local:NWRibbonButton x:Uid="Button_7" Id="dataTool"
+                                      Size="Large"
+                                      KeyTip="B7"
+                                      ShowText="True" 
+                                      Text="DataTool"
+                                      Orientation="Horizontal"/>
+            </RibbonPanelSource>
+        </RibbonPanel>
     </RibbonTab>
 </RibbonControl>
 

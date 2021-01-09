@@ -236,7 +236,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.vaultBrowserControl1, 3);
             this.vaultBrowserControl1.Location = new System.Drawing.Point(3, 29);
             this.vaultBrowserControl1.Name = "vaultBrowserControl1";
-            this.vaultBrowserControl1.Size = new System.Drawing.Size(331, 102);
+            this.vaultBrowserControl1.Size = new System.Drawing.Size(331, 100);
             this.vaultBrowserControl1.TabIndex = 11;
             // 
             // fileName_label
@@ -244,7 +244,7 @@
             this.fileName_label.AutoSize = true;
             this.fileName_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileName_label.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fileName_label.Location = new System.Drawing.Point(2, 134);
+            this.fileName_label.Location = new System.Drawing.Point(2, 132);
             this.fileName_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.fileName_label.Name = "fileName_label";
             this.fileName_label.Size = new System.Drawing.Size(59, 26);
@@ -257,7 +257,7 @@
             this.revision_label.AutoSize = true;
             this.revision_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.revision_label.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.revision_label.Location = new System.Drawing.Point(2, 160);
+            this.revision_label.Location = new System.Drawing.Point(2, 158);
             this.revision_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.revision_label.Name = "revision_label";
             this.revision_label.Size = new System.Drawing.Size(59, 26);
@@ -271,7 +271,7 @@
             this.fileType_comboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileType_comboBox.Enabled = false;
             this.fileType_comboBox.FormattingEnabled = true;
-            this.fileType_comboBox.Location = new System.Drawing.Point(65, 162);
+            this.fileType_comboBox.Location = new System.Drawing.Point(65, 160);
             this.fileType_comboBox.Margin = new System.Windows.Forms.Padding(2);
             this.fileType_comboBox.Name = "fileType_comboBox";
             this.fileType_comboBox.Size = new System.Drawing.Size(270, 21);
@@ -282,10 +282,10 @@
             this.tableLayoutPanel1.SetColumnSpan(this.m_tabControl, 3);
             this.m_tabControl.Controls.Add(this.tabPage1);
             this.m_tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_tabControl.Location = new System.Drawing.Point(3, 189);
+            this.m_tabControl.Location = new System.Drawing.Point(3, 187);
             this.m_tabControl.Name = "m_tabControl";
             this.m_tabControl.SelectedIndex = 0;
-            this.m_tabControl.Size = new System.Drawing.Size(331, 173);
+            this.m_tabControl.Size = new System.Drawing.Size(331, 175);
             this.m_tabControl.TabIndex = 8;
             // 
             // tabPage1
@@ -294,7 +294,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(323, 147);
+            this.tabPage1.Size = new System.Drawing.Size(323, 149);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Uses";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -316,7 +316,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.fileName_multiPartTextBox, 2);
             this.fileName_multiPartTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileName_multiPartTextBox.EditMode = Autodesk.DataManagement.Client.Framework.Forms.Controls.MultiPartTextBoxControl.EditModeOption.FullEdit;
-            this.fileName_multiPartTextBox.Location = new System.Drawing.Point(65, 136);
+            this.fileName_multiPartTextBox.Location = new System.Drawing.Point(65, 134);
             this.fileName_multiPartTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fileName_multiPartTextBox.Name = "fileName_multiPartTextBox";
             this.fileName_multiPartTextBox.Parts = ((System.Collections.Generic.IEnumerable<string>)(resources.GetObject("fileName_multiPartTextBox.Parts")));

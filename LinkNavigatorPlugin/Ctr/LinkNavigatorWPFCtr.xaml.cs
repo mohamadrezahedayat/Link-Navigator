@@ -79,7 +79,7 @@ namespace LinkNavigator.Ctr
             txtNameFilter.Text = string.Empty;
             txtVaultAddress.Text = string.Empty;
         }
-        private void ListenSelection(object sender, EventArgs e)
+        public void ListenSelection(object sender, EventArgs e)
         {
             try
             {
@@ -257,10 +257,8 @@ namespace LinkNavigator.Ctr
         }
         private string generateVaultHyperlink(string server, string pathString)
         {
-
             if (path != null)
             {
-
                 string startLinkString = "http://" + server + "/AutodeskDM/Services/EntityDataCommandRequest.aspx?Vault=VaultDemo&ObjectId=%24%2f";
                 string endLinkString = "&ObjectType=File&Command=Select";
                 return (startLinkString + pathString + endLinkString).Replace(' ', '+');
@@ -269,10 +267,6 @@ namespace LinkNavigator.Ctr
             {
                 return "";
             }
-
-
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -283,5 +277,7 @@ namespace LinkNavigator.Ctr
             }
 
         }
+
+       
     }
 }

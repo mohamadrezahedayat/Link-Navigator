@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using Autodesk.Navisworks.Api;
 
-namespace LinkNavigator.SelectionTool
+namespace LinkNavigator.SelectionToolPlugin
 {
 
     public static class SelectionToolPlugin

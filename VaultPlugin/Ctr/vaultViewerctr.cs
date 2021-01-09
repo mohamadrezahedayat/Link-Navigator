@@ -585,7 +585,7 @@ namespace LinkNavigator.Ctr
             var exLinks = getHyperlinks();
 
             AddURL(label, link, category, exLinks);
-
+            
         }
 
         private void AddURL(string name, string link, string category, List<stringedLink> exLinks)
@@ -641,33 +641,7 @@ namespace LinkNavigator.Ctr
             }
         }
     }
-    //private void asignLinkToNavisItemToolStripMenuItem_Click(object sender, EventArgs e)
-    //{
-
-    //    var selectedItem = navisApp.ActiveDocument.CurrentSelection.SelectedItems.FirstOrDefault();
-    //    var hyperlinkProperties = selectedItem.PropertyCategories.FindCategoryByDisplayName("Hyperlinks").Properties;
-    //    var linksCount = hyperlinkProperties.Count != 0 ? hyperlinkProperties.Count / 3 : 0;
-
-    //    var link = generateHyperlink();
-    //    var label = getFileName().Split('.')[0];
-    //    var category = getPathList().Last();
-
-    //    //AddURL(label, link, category);
-    //    //// generate url property
-    //    VariantData pathData = new VariantData(generateHyperlink());
-    //    var dataPropertyPath = new DataProperty("LcOaURLAttributeURL" + linksCount, "URL" + linksCount, pathData);
-    //    hyperlinkProperties.Add(dataPropertyPath);
-
-    //    // generate name property
-    //    VariantData nameData = new VariantData(getFileName().Split('.')[0]);
-    //    var dataPropertyName = new DataProperty("LcOaURLAttributeName" + linksCount, "Name" + linksCount, nameData);
-    //    hyperlinkProperties.Add(dataPropertyName);
-
-    //    // generate category property
-    //    VariantData categoryData = new VariantData(getPathList().Last());
-    //    var dataPropertyCategory = new DataProperty("LcOaURLAttributeCategory" + linksCount, "Category" + linksCount, categoryData);
-    //    hyperlinkProperties.Add(dataPropertyCategory);
-    //}
+   
     #endregion
 
 }

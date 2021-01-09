@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿using Dapper;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 
@@ -18,12 +23,6 @@ namespace LinkNavigator.Ctr
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            //var navisGeo = new NavisGeometry();
-            //var geos = navisGeo.getFragments();
-
-
         }
-
-
     }
 }

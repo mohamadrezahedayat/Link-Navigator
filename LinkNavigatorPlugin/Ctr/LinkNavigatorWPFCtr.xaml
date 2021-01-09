@@ -32,7 +32,7 @@
                 <TextBox x:Name="txtUrlFilter" Grid.Row="2" Grid.Column="1"  Margin="2" TextChanged="txtUrlFilter_TextChanged"/>
                 <TextBlock Text="Vault Link:" Grid.Row="4" Grid.Column="0" Margin="2"   />
                 <TextBox x:Name="txtVaultAddress" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="2" IsReadOnly="True"/>
-                <Button Grid.Row="4" Grid.Column="4" Margin="2" FontSize="10">Copy</Button>
+                <Button Grid.Row="4" Grid.Column="4" Margin="2" FontSize="10" Click="Button_Click">Copy</Button>
 
 
                 <DockPanel Margin="5" LastChildFill="True" Grid.Row="5"  Grid.ColumnSpan="4">

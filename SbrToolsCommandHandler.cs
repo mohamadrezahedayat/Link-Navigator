@@ -19,6 +19,9 @@ namespace LinkNavigator
     [Command("selectChilds", Icon = "gochildx16.png", LargeIcon = "gochildx32.png", ToolTip = "Select Childs")]
     [Command("addChilds", Icon = "addchildx16.png", LargeIcon = "addchildx32.png", ToolTip = "Add Childs")]
 
+
+    [Command("dataTool", Icon = "databasex16.png", LargeIcon = "databasex32.png", ToolTip = "Data Tool")]
+
     public class SbrToolsCommandHandler : CommandHandlerPlugin
     {
         public override int ExecuteCommand(string name, params string[] parameters)
@@ -79,7 +82,7 @@ namespace LinkNavigator
                     {
                         try
                         {
-                            SelectionTool.SelectionToolPlugin.goToParent();
+                            SelectionToolPlugin.SelectionToolPlugin.goToParent();
                         }
                         catch
                         {
@@ -92,7 +95,7 @@ namespace LinkNavigator
                     {
                         try
                         {
-                            SelectionTool.SelectionToolPlugin.addParent();
+                            SelectionToolPlugin.SelectionToolPlugin.addParent();
                         }
                         catch
                         {
@@ -105,7 +108,7 @@ namespace LinkNavigator
                     {
                         try
                         {
-                            SelectionTool.SelectionToolPlugin.selectChilds();
+                            SelectionToolPlugin.SelectionToolPlugin.selectChilds();
                         }
                         catch
                         {
@@ -118,12 +121,29 @@ namespace LinkNavigator
                     {
                         try
                         {
-                            SelectionTool.SelectionToolPlugin.addChilds();
+                            SelectionToolPlugin.SelectionToolPlugin.addChilds();
                         }
                         catch
                         {
 
                         }
+                    }
+                    break;
+                case "dataTool":
+                    if (!Autodesk.Navisworks.Api.Application.IsAutomated)
+                    {
+                        var pluginRecord = Autodesk.Navisworks.Api.Application.Plugins.FindPlugin("DataTool.MohamadrezaHedayat");
+                        if (pluginRecord != null && pluginRecord is DockPanePluginRecord && pluginRecord.IsEnabled)
+                        {
+                            var docPanel = (DockPanePlugin)(pluginRecord.LoadedPlugin ?? pluginRecord.LoadPlugin());
+
+                            if (docPanel != null)
+                            {
+                                //switch the Visible flag
+                                docPanel.Visible = !docPanel.Visible;
+                            }
+                        }
+                       
                     }
                     break;
             }
