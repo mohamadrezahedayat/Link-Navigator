@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkNavigator", "LinkNavigator.csproj", "{C4360B01-5C8D-45EE-9386-7E06FD4584D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "..\ConsoleApp1\ConsoleApp1.csproj", "{30DC63BA-A4E6-4A0E-9720-F044F1102600}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gltfGeneratorApp", "..\ConsoleApp1\gltfGeneratorApp.csproj", "{30DC63BA-A4E6-4A0E-9720-F044F1102600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

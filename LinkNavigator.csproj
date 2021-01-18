@@ -78,9 +78,6 @@
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\Autodesk.Navisworks.Interop.ComApi.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Dapper.2.0.78\lib\net461\Dapper.dll</HintPath>
-    </Reference>
     <Reference Include="navisworks.gui.roamer">
       <HintPath>..\..\..\..\..\Program Files\Autodesk\Navisworks Manage 2018\navisworks.gui.roamer.dll</HintPath>
       <Private>False</Private>
@@ -121,6 +118,7 @@
     <Compile Include="DatToolPlugin\Services\Navis3dModelRepository.cs" />
     <Compile Include="DatToolPlugin\Services\Navis3dModelRepositoryAdo.cs" />
     <Compile Include="DatToolPlugin\UnitOfWork.cs" />
+    <Compile Include="GltfExporterPlugin\CallbackGeoListener.cs" />
     <Compile Include="GltfExporterPlugin\NavisGeometry.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -235,7 +233,6 @@
     <Content Include="images\vault16x16.png" />
     <Content Include="images\vault32x32.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set path=$(ProjectDir)Ribbon.xaml

@@ -17,7 +17,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Autodesk.Navisworks.Api;
-using Dapper;
 using LinkNavigator.DatToolPlugin.Services;
 //using LinkNavigator.DatToolPlugin.Models;
 //using LinkNavigator.DatToolPlugin.Services;
