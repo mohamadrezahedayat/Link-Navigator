@@ -20,12 +20,14 @@ namespace LinkNavigator.GltfExporter
             //convert to COM selection
             oSel = ComBridge.ToInwOpSelection(oModelColl);
         }
-        public CallbackGeomListener getFragments()
+        public List<CallbackGeomListener> getFragments()
         {
+            var callbackListeners = new List<CallbackGeomListener>();
             // create the callback object
-            CallbackGeomListener callbkListener = new CallbackGeomListener();
+            
             foreach (COMApi.InwOaPath3 path in oSel.Paths())
             {
+            CallbackGeomListener callbkListener = new CallbackGeomListener();
                 foreach (COMApi.InwOaFragment3 frag in path.Fragments())
                 {
                     COMApi.InwLTransform3f3 localToWorld = (COMApi.InwLTransform3f3)(object)frag.GetLocalToWorldMatrix();
@@ -42,8 +44,9 @@ namespace LinkNavigator.GltfExporter
                     callbkListener.matrix = elementsFloat;
                     frag.GenerateSimplePrimitives(COMApi.nwEVertexProperty.eNORMAL, callbkListener);
                 }
+                callbackListeners.Add(callbkListener);
             }
-            return callbkListener;
+            return callbackListeners;
         }
         public T[] ToArray<T>(Array arr)
         {
